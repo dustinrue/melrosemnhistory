@@ -18,8 +18,9 @@ concurrency:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    # The CLOUDFLARE_API_TOKEN secret is stored in the GitHub environment named "main".
     environment:
-      name: production
+      name: main
       url: https://www.melrosemnhistory.com
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}

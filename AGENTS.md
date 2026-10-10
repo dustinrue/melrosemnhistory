@@ -262,7 +262,8 @@ Repository: `github.com/dustinrue/melrosemnhistory` (branch `main` is production
 | `ci.yml` -> `preview` | every PR from this repo | deploys a **noindex** preview to `https://pr-<number>.melrosemnhistory.pages.dev`, smoke-tests it, prints the link in the job summary |
 | `deploy.yml` | push to `main`, or manually | `scripts/deploy.sh production` (verify + upload), then `scripts/smoke-test.mjs` against the live site |
 
-**Required repository secret** (Settings -> Secrets and variables -> Actions): `CLOUDFLARE_API_TOKEN`, a token limited to
+**Required secret:** `CLOUDFLARE_API_TOKEN`, stored as a secret of the GitHub **environment named `main`** (Settings -> Environments
+-> main; the jobs declare `environment: main` to read it). It is a token limited to
 *Account -> Cloudflare Pages -> Edit* for the melrosemnhistory.com account. Nothing else is needed: the account ID and the public
 Umami values are in `scripts/deploy.sh`. Use a dedicated least-privilege token for CI, not a token that can also edit DNS.
 

@@ -41,6 +41,8 @@ jobs:
     # Secrets are not available to PRs from forks; skip there.
     if: github.event.pull_request.head.repo.full_name == github.repository
     runs-on: ubuntu-latest
+    # The CLOUDFLARE_API_TOKEN secret is stored in the GitHub environment named "main".
+    environment: main
     env:
       CLOUDFLARE_API_TOKEN: ${{ secrets.CLOUDFLARE_API_TOKEN }}
       PREVIEW_BRANCH: pr-${{ github.event.pull_request.number }}
