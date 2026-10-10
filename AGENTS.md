@@ -84,7 +84,7 @@ Hours, season, admission prices, address, phone, email, Facebook URL, map links.
   hours out: `src/content/sections/visit-visiting.md` (first paragraph) and `src/data/home.json` → `visitCard.hoursSub`.
 - Changing **admission**: edit the `admission` array AND `admissionSummary.primary/secondary` (the short Home-page line),
   and keep them consistent.
-- Changing the **phone**: edit `phone` only (format `320-256-3933`; the build rejects other formats). It is used everywhere
+- Changing the **phone**: edit `phone` only (format `320-256-4996`; the build rejects other formats). It is used everywhere
   including `tel:` links.
 - `locationNote` and `followNote` are the small captions on the Visit page fact cards.
 
@@ -242,12 +242,16 @@ jobs:
 
 Content carried over from the 2013-era site that may be stale or inconsistent. Do not silently "fix"; ask.
 
-1. **Phone number is unconfirmed.** Two numbers existed: `320-256-3933` (hours/store/volunteer pages and both PDF forms) and
-   `320-256-4996` (old header banner/contact page). The site uses `320-256-3933`. Owner says the correct number is not yet known.
+1. **Phone number.** The site publishes **320-256-4996** everywhere (single source: `phone` in `src/data/site.json`).
+   *Reference:* the old site also used **320-256-3933** on the hours, store and volunteer pages and in both PDF forms; the owner
+   says that number **rings to a specific person**, so it must not be published as the general number. Keep it here for
+   reference only. **Both PDF forms (`public/files/membership-form.pdf`, `volunteer-form.pdf`) still print 320-256-3933** and
+   should be re-exported with 320-256-4996 (the original Illustrator files, `membership.ai` and `volunteerform.ai`, are in the
+   legacy `images/` folder, outside this repo). Until then the printed forms disagree with the website.
 2. **Email:** confirmed by the owner as `rpaschke@meltel.com` (the old website HTML said `.net`, which was wrong). The site and
    both PDF forms now agree. Consider a role address (e.g. info@) eventually.
 3. **Hours, admission, membership prices** date from ~2013 and are unconfirmed. Owner has deferred checking them. The PDF forms
-   repeat the prices, so update them together when confirmed.
+   repeat the prices (and the phone, see item 1), so update them together when confirmed.
 4. **Board list** is from the old site (a person was removed and one added at the owner's request); confirm it is current.
 5. **Unverified source wording** kept as written: "F-882 fighter planes" (Gallagher story), "Wapeton Dakota" (likely
    "Wahpeton"), and a sentence in the Convents story that was ungrammatical in the original ("had a convent in a large home
