@@ -28,3 +28,8 @@ and how to publish. It is written for AI coding agents and humans alike.
 | Family / oral / video history lists | `src/data/lists/*.txt` |
 | Volunteer areas, donation types (also print on the form) | `src/data/volunteer.json` |
 | Photos | `src/assets/photos/` |
+
+## Publishing
+
+Merging to `main` deploys automatically (GitHub Actions -> Cloudflare Pages). Pull requests get a checked preview URL.
+Setup and details: AGENTS.md sections 8 and 10.

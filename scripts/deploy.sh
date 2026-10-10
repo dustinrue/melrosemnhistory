@@ -2,6 +2,7 @@
 # Build the site and upload it to Cloudflare Pages (Direct Upload). No git integration needed.
 #
 #   scripts/deploy.sh preview      noindex build -> https://preview.melrosemnhistory.pages.dev
+#                                  (set PREVIEW_BRANCH=pr-12 to deploy to https://pr-12.melrosemnhistory.pages.dev instead)
 #   scripts/deploy.sh production   LIVE: indexable build -> https://www.melrosemnhistory.com (and melrosemnhistory.pages.dev)
 #
 # Auth: set CLOUDFLARE_API_TOKEN (or CF_MUSEUM) to an API token with "Cloudflare Pages: Edit" on the account.
@@ -17,7 +18,7 @@ export CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:-${CF_MUSEUM:-}}
 export CLOUDFLARE_ACCOUNT_ID=$ACCOUNT_ID CI=true WRANGLER_SEND_METRICS=false
 
 case "$TARGET" in
-  preview)    BRANCH=preview; export PUBLIC_NOINDEX=true; export SITE_URL=https://preview.$PROJECT.pages.dev ;;
+  preview)    BRANCH=${PREVIEW_BRANCH:-preview}; export PUBLIC_NOINDEX=true; export SITE_URL=https://$BRANCH.$PROJECT.pages.dev ;;
   production) BRANCH=main;    unset PUBLIC_NOINDEX;       export SITE_URL=${SITE_URL:-https://www.melrosemnhistory.com}
               # Self-hosted Umami analytics (public values, same as the old site). Production only, so staging
               # and preview visits are not counted. Override by exporting the variables before running.
@@ -28,5 +29,5 @@ esac
 
 cd "$(dirname "$0")/.."
 npm run verify
-npx --yes wrangler pages deploy dist --project-name="$PROJECT" --branch="$BRANCH" \
+npx --yes wrangler@4 pages deploy dist --project-name="$PROJECT" --branch="$BRANCH" \
   --commit-dirty=true --commit-message="$TARGET deploy $(git rev-parse --short HEAD 2>/dev/null || echo local)"

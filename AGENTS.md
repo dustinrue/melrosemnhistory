@@ -72,6 +72,9 @@ public/
   favicon.svg, _redirects
 scripts/verify.mjs      post-build checks
 scripts/deploy.sh       build + upload to Cloudflare Pages (preview | production)
+scripts/smoke-test.mjs  post-deploy checks against a live URL
+scripts/check-content-only.sh   CI guard: fails if a change touches the design zone
+.github/workflows/      ci.yml (PR checks + preview), deploy.yml (main -> production)
 needs-verification.md   wording that must be checked against a source before changing (see section 12)
 tools/visual-diff/      optional screenshot comparison (section 9)
 ```
@@ -187,7 +190,7 @@ still fits one page.
 | Other DNS | Mail (Google MX/SPF/DKIM), `staging`, `mail`, `ftp`, `ssh`, `autoconfig`, `autodiscover` records are unchanged. `staging.melrosemnhistory.com` still points at web2. |
 | Preview | `scripts/deploy.sh preview` -> <https://preview.melrosemnhistory.pages.dev> (noindex, not counted in analytics) |
 | Deploy to live | `scripts/deploy.sh production` (builds, runs `npm run verify`, uploads `dist/` with Wrangler). **This replaces the live site.** Run `preview` first for anything risky. |
-| Token | account-scoped API token with **Cloudflare Pages: Edit** (and DNS edit if DNS must change), supplied through the `CF_MUSEUM` (or `CLOUDFLARE_API_TOKEN`) environment variable. Never commit it, paste it into files, or print it. |
+| Token | locally: an account-scoped API token with **Cloudflare Pages: Edit** (plus DNS/ruleset edit if DNS must change) in the `CF_MUSEUM` or `CLOUDFLARE_API_TOKEN` environment variable. In CI: the `CLOUDFLARE_API_TOKEN` repository secret (section 10). Never commit it, paste it into files, or print it. |
 | Rollback (page content) | redeploy the previous commit (`git checkout <sha> && scripts/deploy.sh production`), or in the dashboard: Workers & Pages -> project -> Deployments -> "Rollback to this deployment". |
 | Rollback (DNS) | point the `www` CNAME back at `melrosemnhistory.com` (proxied) to serve the old web2 site again. The original records were backed up at cutover. |
 
@@ -195,7 +198,7 @@ still fits one page.
 `melrosemnhistory.pages.dev` serves the same production deployment, so it is also publicly reachable (duplicate hostname; the
 sitemap and links use `www`).
 
-Direct Upload fits the planned CI: a GitHub Action can run `scripts/deploy.sh production` (store the token as a repository secret).
+Direct Upload works with the GitHub Actions workflows in section 10 (they run `scripts/deploy.sh`).
 Caveat: Cloudflare cannot convert a Direct Upload project to Git integration later; that would mean creating a new project.
 
 Optional improvement: add a `public/_headers` file to cache `/_astro/*` for a year
@@ -248,23 +251,31 @@ A content-only change should differ only where the text changed. The footer year
 If a check fails: read the message (they are written to be readable), fix the content, re-run. Do not weaken a schema or
 check to make a build pass.
 
-## 10. CI plan (not set up yet)
+## 10. CI/CD (GitHub Actions)
 
-Intended later: a GitHub Action on every PR that runs `npm ci && npm run verify`, plus a guard that fails when a PR labelled
-"content" touches the Design zone (section 2). Deployment stays with Cloudflare Pages. Sketch:
+Repository: `github.com/dustinrue/melrosemnhistory` (branch `main` is production). Workflows live in `.github/workflows/`.
 
-```yaml
-on: [pull_request]
-jobs:
-  verify:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with: { node-version-file: .nvmrc, cache: npm }
-      - run: npm ci
-      - run: npm run verify
-```
+| Workflow | Runs on | What it does |
+|---|---|---|
+| `ci.yml` -> `verify` | every pull request | `npm ci` + `npm run verify` (schemas, links, alt text, CSS assets, canonicals) |
+| `ci.yml` -> `content-guard` | PRs with the **`content`** label | `scripts/check-content-only.sh` fails if the PR touches the design zone (section 2) |
+| `ci.yml` -> `preview` | every PR from this repo | deploys a **noindex** preview to `https://pr-<number>.melrosemnhistory.pages.dev`, smoke-tests it, prints the link in the job summary |
+| `deploy.yml` | push to `main`, or manually | `scripts/deploy.sh production` (verify + upload), then `scripts/smoke-test.mjs` against the live site |
+
+**Required repository secret** (Settings -> Secrets and variables -> Actions): `CLOUDFLARE_API_TOKEN`, a token limited to
+*Account -> Cloudflare Pages -> Edit* for the melrosemnhistory.com account. Nothing else is needed: the account ID and the public
+Umami values are in `scripts/deploy.sh`. Use a dedicated least-privilege token for CI, not a token that can also edit DNS.
+
+**Normal workflow:** branch -> edit content -> `npm run verify` -> open a PR (add the `content` label for content-only
+changes) -> review the preview URL -> merge -> the site deploys automatically. Branch protection on `main` (require the
+`verify` check) is recommended.
+
+**Rolling back:** revert the merge commit on `main` (the deploy runs again), or use "Rollback" under Deployments in the Cloudflare
+dashboard for an instant revert.
+
+**Smoke test** (`scripts/smoke-test.mjs <url> [--noindex-ok]`): fetches all pages, every asset they load (including CSS
+`url()` images), and checks canonicals and robots. It retries for ~3 minutes to allow for edge propagation. Run it by hand any
+time: `node scripts/smoke-test.mjs https://www.melrosemnhistory.com`.
 
 ## 11. Changelog policy and git
 
