@@ -1,7 +1,7 @@
 ---
-image: research.webp
-imageAlt: "Shelves of family history binders and books in the research center"
-imageCaption: "Family histories fill the research center shelves."
+image: research-workstations.webp
+imageAlt: "Two computer workstations on a corner desk in the research center, with a printer and an overhead document scanner"
+imageCaption: "Computers, a printer and a document scanner for research."
 ---
 
 In the Research Center of the Melrose Area Museum, visitors will be assisted in searching the files and records collected to date. These include newspaper articles, family histories, oral history tapes, video histories, death notices and photographs.
