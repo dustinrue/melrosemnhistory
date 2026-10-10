@@ -120,7 +120,7 @@ list built from `src/data/volunteer.json`. The same data prints on the volunteer
 adds any base path. Always end page links with `/`. External links use the full `https://…` URL.
 
 ### Collection stories — `src/content/stories/*.md`
-One file per story; the file name is the anchor (`gallagher.md` → `/collections/#gallagher`). Front matter:
+One file per story; the file name is the anchor (`hospital.md` → `/collections/#hospital`). Front matter:
 `title`, `order` (display order, 1..n), optional `image` + `imageAlt` (+ `imageCaption`) shown beside the text, optional
 `image2` + `image2Alt` stacked under it, and an optional `gallery` list (each item `image`, `alt`, optional `caption`) shown as a
 row of photos under the text for stories that have more than two.
