@@ -261,15 +261,27 @@ Content carried over from the 2013-era site that may be stale or inconsistent. D
    Consider a role address (e.g. info@) eventually.
    **Address (resolved):** `518 2nd St SE`. Melrose changed to the SE address format; the old volunteer PDF's "518 E Second Street S"
    is outdated.
-3. **Hours, admission, membership prices** date from ~2013 and are unconfirmed. Owner has deferred checking them. Prices feed the
-   website and the printable form from `membership.json`, so one edit updates both.
-4. **Board list** is from the old site (a person was removed and one added at the owner's request); confirm it is current.
-5. **Unverified source wording** kept as written: "F-882 fighter planes" (Gallagher story), "Wapeton Dakota" (likely
-   "Wahpeton"), and a sentence in the Convents story that was ungrammatical in the original ("had a convent in a large home
-   built by pioneer resident Peter Pallansch" is an interpretation).
+3. **Hours, admission, membership prices (resolved):** the owner treats the current values as confirmed. Prices feed the website
+   and the printable form from `membership.json`, so one edit updates both.
+4. **Board list (resolved):** the owner confirmed it is current (a person was removed and one added during the migration).
+5. **Source wording in the Gallagher / Lucky Lady and Native Americans / Convents stories (OPEN).** Kept as the old site had it,
+   except where noted. Verify against the Melrose Beacon archive (1908-2008, digitized at the museum) before changing:
+   - **"F-882 fighter planes"** (Gallagher story, parade): not a real aircraft designation. Possibly the F-82 Twin Mustang, a
+     fighter in service in 1949, but not verified. Check the May 1949 Beacon.
+   - **"Total air time was 78 hours 54 minutes; average 249 miles per hour"**: the figures disagree. Official Air Force sources
+     describe the flight as 94 hours 1 minute over 23,452 miles, which averages ~249 mph, so "78 hours 54 minutes" looks wrong.
+     Also, the aircraft was named *Lucky Lady II*.
+   - **"22nd anniversary of Lindbergh's landing in Paris"**: the original read "22nd year of Lindbergh's landing". Lindbergh took
+     off May 20, 1927 and landed May 21, so "anniversary of Lindbergh's flight" would be exact. The wording was lightly reworded
+     during migration.
+   - **"Wapeton Dakota"** (Native Americans story): no source uses this spelling; the standard form is **Wahpeton**. Safe to change.
+   - **Convents story, St. Patrick's sentence:** the original was ungrammatical ("also had a convent large home built by pioneer
+     resident Peter Pallansch"). Migrated as "had a convent in a large home built by…", which is an interpretation.
+   - The Native Americans dates ("Malmo focus … 300 to 1000 A.D.") match the central-Minnesota Woodland chronology; no change
+     suggested.
 6. **Typos fixed during migration** (so nobody "re-fixes" them): Walter Haut, August Kuhlmann, *Spirit* of St. Louis,
    Chronicle, Fort Worth, Woodland Period, Hetzel, Lake Wobegon.
-7. **Fonts** load from Google Fonts. Self-hosting would remove the third-party request.
+7. **Fonts (resolved):** the owner is fine with loading Fraunces and Source Sans 3 from Google Fonts.
 8. **Legacy source files** (original HTML, PSDs, stock photos, the old PDFs) are intentionally not in this repository.
 9. **Volunteer areas / donation types (resolved):** the lists on the Get Involved page and the printed volunteer form come from
    `src/data/volunteer.json`. They were taken from the old volunteer PDF plus the old Volunteer page text, and the owner approved
