@@ -40,8 +40,8 @@ Last updated: October 2026.
 
 - **Where:** `src/content/stories/gallagher.md` (several mentions of "Lucky Lady"), `src/data/home.json` (story card), `src/data/timeline.json`
 - **Current text:** "Lucky Lady"
-- **Concern:** the 1949 aircraft is generally named **Lucky Lady II** (the first *Lucky Lady* was a different flight). The
-  short form may be what the community used at the time.
+- **Concern:** published sources name the 1949 aircraft **Lucky Lady II**. The short form "Lucky Lady" may simply be what the
+  community called it at the time.
 - **To verify:** how the Beacon referred to it. Decide whether to keep the local usage or use the formal name.
 - **Proposed fix once confirmed:** use "Lucky Lady II" at least on first mention.
 
