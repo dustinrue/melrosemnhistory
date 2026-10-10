@@ -71,6 +71,7 @@ src/
 public/
   favicon.svg, _redirects
 scripts/verify.mjs      post-build checks
+scripts/deploy.sh       build + upload to Cloudflare Pages (preview | production)
 needs-verification.md   wording that must be checked against a source before changing (see section 12)
 tools/visual-diff/      optional screenshot comparison (section 9)
 ```
@@ -173,9 +174,27 @@ still fits one page.
 
 ## 8. Build, hosting and environment
 
-**Cloudflare Pages (preferred):** connect the git repo. Build command `npm run build`, output directory `dist`,
-environment variable `NODE_VERSION=22`. Every branch/PR gets a preview URL; merging to `main` publishes. `public/_redirects`
-and `404.html` are honoured automatically. Free tier is sufficient.
+**Cloudflare Pages (preferred):** Current state (set up October 2026):
+
+| | |
+|---|---|
+| Project | `melrosemnhistory` (Direct Upload, production branch `main`), account "melrosemnhistory.com" |
+| URL | <https://melrosemnhistory.pages.dev> (preview deployments: `https://preview.melrosemnhistory.pages.dev`) |
+| What is deployed | a **noindex** build of the site, for review. The custom domain is **not attached yet**; `www.melrosemnhistory.com` still points at the old web2 server. |
+| Deploy | `scripts/deploy.sh preview` or `scripts/deploy.sh production` (builds, runs `npm run verify`, uploads `dist/` with Wrangler) |
+| Token | an account-scoped API token with **Cloudflare Pages: Edit**, supplied through the `CF_MUSEUM` (or `CLOUDFLARE_API_TOKEN`) environment variable. Never commit it, paste it into files, or print it. |
+
+Direct Upload fits the planned CI: a GitHub Action can run `scripts/deploy.sh` (store the token as a repository secret).
+Caveat: Cloudflare cannot convert a Direct Upload project to Git integration later; that would mean creating a new project.
+`public/_redirects` and `404.html` are honoured automatically (verified: old `.html` URLs 301 to the new pages).
+
+**Go-live checklist (custom domain):**
+1. Run `scripts/deploy.sh production` so the production deployment is an indexable build (`PUBLIC_NOINDEX` unset, `SITE_URL` set).
+2. Cloudflare dashboard -> Workers & Pages -> `melrosemnhistory` -> Custom domains -> add `www.melrosemnhistory.com`
+   (and redirect the apex to `www`). This changes DNS for the live site, so do it deliberately and have the old server
+   available for rollback.
+3. Re-check `/`, `/visit/`, the forms and a few legacy `.html` URLs on the real domain; confirm `robots.txt` allows crawling.
+4. Optional: add a `public/_headers` file to cache `/_astro/*` for a year (`Cache-Control: public, max-age=31536000, immutable`).
 
 **GitHub Pages:** build with GitHub Actions and publish `dist/`. `_redirects` is not supported there; the old `.html`
 URLs would 404 unless stub pages are added. Prefer Cloudflare Pages if the old URLs matter.

@@ -8,6 +8,7 @@ no server, no checkout. Hosting cost is the domain.
 npm install        # once
 npm run dev        # http://localhost:4321, live-reloads while you edit
 npm run verify     # production build + safety checks (run before every commit)
+scripts/deploy.sh preview   # upload a noindex build to Cloudflare Pages (see AGENTS.md section 8)
 ```
 
 Requires Node 22.12 or newer (`.nvmrc` says 22).
