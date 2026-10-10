@@ -1,10 +1,8 @@
 #!/usr/bin/env bash
 # Build the site and upload it to Cloudflare Pages (Direct Upload). No git integration needed.
 #
-#   scripts/deploy.sh staging      noindex build -> https://melrosemnhistory.pages.dev (the project's main/production slot)
 #   scripts/deploy.sh preview      noindex build -> https://preview.melrosemnhistory.pages.dev
-#   scripts/deploy.sh production   indexable build -> the project's production deployment
-#                                  (melrosemnhistory.pages.dev and any custom domain attached to the project)
+#   scripts/deploy.sh production   LIVE: indexable build -> https://www.melrosemnhistory.com (and melrosemnhistory.pages.dev)
 #
 # Auth: set CLOUDFLARE_API_TOKEN (or CF_MUSEUM) to an API token with "Cloudflare Pages: Edit" on the account.
 # Never commit the token. Requires Node 22+ and network access; wrangler runs via npx (not a project dependency).
@@ -19,10 +17,13 @@ export CLOUDFLARE_API_TOKEN=${CLOUDFLARE_API_TOKEN:-${CF_MUSEUM:-}}
 export CLOUDFLARE_ACCOUNT_ID=$ACCOUNT_ID CI=true WRANGLER_SEND_METRICS=false
 
 case "$TARGET" in
-  staging)    BRANCH=main;    export PUBLIC_NOINDEX=true; export SITE_URL=https://$PROJECT.pages.dev ;;
   preview)    BRANCH=preview; export PUBLIC_NOINDEX=true; export SITE_URL=https://preview.$PROJECT.pages.dev ;;
-  production) BRANCH=main;    unset PUBLIC_NOINDEX;       export SITE_URL=${SITE_URL:-https://www.melrosemnhistory.com} ;;
-  *) echo "usage: $0 [staging|preview|production]" >&2; exit 1 ;;
+  production) BRANCH=main;    unset PUBLIC_NOINDEX;       export SITE_URL=${SITE_URL:-https://www.melrosemnhistory.com}
+              # Self-hosted Umami analytics (public values, same as the old site). Production only, so staging
+              # and preview visits are not counted. Override by exporting the variables before running.
+              export PUBLIC_UMAMI_SRC=${PUBLIC_UMAMI_SRC:-https://umami.dustinrue.com/umami}
+              export PUBLIC_UMAMI_ID=${PUBLIC_UMAMI_ID:-7bdeb488-e18a-4538-a73a-c84dc6eda37f} ;;
+  *) echo "usage: $0 [preview|production]" >&2; exit 1 ;;
 esac
 
 cd "$(dirname "$0")/.."

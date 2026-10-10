@@ -174,27 +174,29 @@ still fits one page.
 
 ## 8. Build, hosting and environment
 
-**Cloudflare Pages (preferred):** Current state (set up October 2026):
+**Cloudflare Pages (in production, since October 2026):**
 
 | | |
 |---|---|
-| Project | `melrosemnhistory` (Direct Upload, production branch `main`), account "melrosemnhistory.com" |
-| URL | <https://melrosemnhistory.pages.dev> (preview deployments: `https://preview.melrosemnhistory.pages.dev`) |
-| What is deployed | a **noindex** build of the site, for review. The custom domain is **not attached yet**; `www.melrosemnhistory.com` still points at the old web2 server. |
-| Deploy | `scripts/deploy.sh staging` (noindex, the pages.dev URL), `preview` (noindex alias) or `production` (indexable). Builds, runs `npm run verify`, uploads `dist/` with Wrangler. |
-| Token | an account-scoped API token with **Cloudflare Pages: Edit**, supplied through the `CF_MUSEUM` (or `CLOUDFLARE_API_TOKEN`) environment variable. Never commit it, paste it into files, or print it. |
+| Project | `melrosemnhistory` (Direct Upload, production branch `main`), Cloudflare account "melrosemnhistory.com" |
+| Live site | <https://www.melrosemnhistory.com>. The `www` DNS record is a proxied CNAME to `melrosemnhistory.pages.dev`; custom domain attached to the project. |
+| Apex | `melrosemnhistory.com` is still an A record to the old web2 server, which 301s to `www`. If web2 is ever retired, replace this with a Cloudflare Redirect Rule (apex -> www) first. |
+| Other DNS | Mail (Google MX/SPF/DKIM), `staging`, `mail`, `ftp`, `ssh`, `autoconfig`, `autodiscover` records are unchanged. `staging.melrosemnhistory.com` still points at web2. |
+| Preview | `scripts/deploy.sh preview` -> <https://preview.melrosemnhistory.pages.dev> (noindex, not counted in analytics) |
+| Deploy to live | `scripts/deploy.sh production` (builds, runs `npm run verify`, uploads `dist/` with Wrangler). **This replaces the live site.** Run `preview` first for anything risky. |
+| Token | account-scoped API token with **Cloudflare Pages: Edit** (and DNS edit if DNS must change), supplied through the `CF_MUSEUM` (or `CLOUDFLARE_API_TOKEN`) environment variable. Never commit it, paste it into files, or print it. |
+| Rollback (page content) | redeploy the previous commit (`git checkout <sha> && scripts/deploy.sh production`), or in the dashboard: Workers & Pages -> project -> Deployments -> "Rollback to this deployment". |
+| Rollback (DNS) | point the `www` CNAME back at `melrosemnhistory.com` (proxied) to serve the old web2 site again. The original records were backed up at cutover. |
 
-Direct Upload fits the planned CI: a GitHub Action can run `scripts/deploy.sh` (store the token as a repository secret).
+`public/_redirects` and `404.html` are honoured (verified on the live domain: old `.html` and PDF URLs 301 to the new pages).
+`melrosemnhistory.pages.dev` serves the same production deployment, so it is also publicly reachable (duplicate hostname; the
+sitemap and links use `www`).
+
+Direct Upload fits the planned CI: a GitHub Action can run `scripts/deploy.sh production` (store the token as a repository secret).
 Caveat: Cloudflare cannot convert a Direct Upload project to Git integration later; that would mean creating a new project.
-`public/_redirects` and `404.html` are honoured automatically (verified: old `.html` URLs 301 to the new pages).
 
-**Go-live checklist (custom domain):**
-1. Run `scripts/deploy.sh production` so the production deployment is an indexable build (`PUBLIC_NOINDEX` unset, `SITE_URL` set).
-2. Cloudflare dashboard -> Workers & Pages -> `melrosemnhistory` -> Custom domains -> add `www.melrosemnhistory.com`
-   (and redirect the apex to `www`). This changes DNS for the live site, so do it deliberately and have the old server
-   available for rollback.
-3. Re-check `/`, `/visit/`, the forms and a few legacy `.html` URLs on the real domain; confirm `robots.txt` allows crawling.
-4. Optional: add a `public/_headers` file to cache `/_astro/*` for a year (`Cache-Control: public, max-age=31536000, immutable`).
+Optional improvement: add a `public/_headers` file to cache `/_astro/*` for a year
+(`Cache-Control: public, max-age=31536000, immutable`).
 
 **GitHub Pages:** build with GitHub Actions and publish `dist/`. `_redirects` is not supported there; the old `.html`
 URLs would 404 unless stub pages are added. Prefer Cloudflare Pages if the old URLs matter.
@@ -208,7 +210,7 @@ Environment variables (see `.env.example`; set in the host dashboard or CI, not 
 | `SITE_URL` | Absolute site URL, used for `sitemap.xml` and `robots.txt`. |
 | `SITE_BASE` | Only when served from a sub-path (previews), e.g. `/mockups/preview/`. Leave unset in production. |
 | `PUBLIC_NOINDEX` | `true` on staging/preview builds: adds `noindex` and a `Disallow: /` robots.txt. **Unset in production.** |
-| `PUBLIC_UMAMI_SRC`, `PUBLIC_UMAMI_ID` | Enables the self-hosted Umami analytics snippet (both required). The old site used `https://umami.dustinrue.com/umami`. |
+| `PUBLIC_UMAMI_SRC`, `PUBLIC_UMAMI_ID` | Enables the self-hosted Umami analytics snippet (both required). `scripts/deploy.sh production` sets them (the same values the old site used); staging/preview builds do not, so they are not counted. These are build-time variables: with Direct Upload, Cloudflare dashboard variables are **not** used, so change them in the script or the shell. |
 
 Caching: CSS/JS/images get content-hashed file names (`/_astro/…`), so changed assets get new URLs automatically and never
 need a cache purge. HTML pages are not hashed; after a deploy a visitor's browser may briefly show an older page.
