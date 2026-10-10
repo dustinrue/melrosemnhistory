@@ -271,5 +271,7 @@ Content carried over from the 2013-era site that may be stale or inconsistent. D
    Chronicle, Fort Worth, Woodland Period, Hetzel, Lake Wobegon.
 7. **Fonts** load from Google Fonts. Self-hosting would remove the third-party request.
 8. **Legacy source files** (original HTML, PSDs, stock photos, the old PDFs) are intentionally not in this repository.
-9. **Volunteer areas / donation types** on the forms were taken from the old volunteer PDF plus the old Volunteer page text (the
-   form now also offers "Organizing displays"). Confirm the list matches what the Society actually wants.
+9. **Volunteer areas / donation types (resolved):** the lists on the Get Involved page and the printed volunteer form come from
+   `src/data/volunteer.json`. They were taken from the old volunteer PDF plus the old Volunteer page text, and the owner approved
+   adding "Organizing displays" to the form. The form wording ("Please check one: New / Renewal", "Additional donation $") was
+   also reviewed and approved.
