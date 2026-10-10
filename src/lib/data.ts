@@ -45,8 +45,9 @@ export const books = z.array(z.object({ title: nonEmpty, subtitle: z.string() })
 export const home = z.object({
   hero: z.object({ eyebrow: nonEmpty, headline: nonEmpty, lede: nonEmpty, primaryCta: nonEmpty, secondaryCta: nonEmpty }),
   visitCard: z.object({
-    hoursSub: nonEmpty, findSub: nonEmpty, callSub: nonEmpty, followText: nonEmpty,
+    hoursSub: nonEmpty, findSub: nonEmpty, callSub: nonEmpty,
   }),
+  follow: z.object({ heading: nonEmpty, text: nonEmpty, button: nonEmpty }),
   intro: z.object({ eyebrow: nonEmpty, heading: nonEmpty, lede: nonEmpty, body: nonEmpty, towns: z.array(nonEmpty).min(1),
     photos: z.array(z.object({ image: nonEmpty, alt: nonEmpty })).length(2) }),
   tiles: z.object({

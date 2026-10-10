@@ -27,7 +27,13 @@ const teaser = home.timeline.years.map((y) => {
     <div class="cell"><h3>Find us</h3><div class="big">{site.address1}</div><div class="sub">{site.city} · {home.visitCard.findSub}</div></div>
     <div class="cell"><h3>Call</h3><div class="big">{site.phone}</div><div class="sub">{home.visitCard.callSub}</div></div>
   </div>
-  <p class="follow">{home.visitCard.followText} <a href={site.facebook} rel="noopener">our Facebook page</a>.</p></div>
+  <div class="follow-bar">
+    <span class="fb-icon" aria-hidden="true">
+      <svg viewBox="0 0 24 24" width="26" height="26" focusable="false"><path fill="currentColor" d="M13.5 22v-8h2.7l.5-3.2h-3.2V8.8c0-.9.4-1.7 1.8-1.7h1.5V4.3S15.4 4 14.2 4C11.7 4 10 5.5 10 8.5v2.3H7.3V14H10v8h3.5z"/></svg>
+    </span>
+    <div class="fb-text"><b>{home.follow.heading}</b><span>{home.follow.text}</span></div>
+    <a class="btn solid" href={site.facebook} rel="noopener">{home.follow.button}</a>
+  </div></div>
 
   <section>
     <div class="wrap intro">
