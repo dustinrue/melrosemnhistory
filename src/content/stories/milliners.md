@@ -1,9 +1,9 @@
 ---
 title: "Melrose Milliners"
 order: 5
-image: coats.webp
-imageAlt: "Coats, furs and hats displayed on mannequins"
-imageCaption: "Clothing display in the museum"
+image: clothing-display.webp
+imageAlt: "Display of women's dresses from several decades on mannequins and hangers in front of red and lace curtains, including a green beaded dress, a pink chiffon dress, an orange dress with a fur stole and a feathered hat, and a floral dress with a straw hat, with a fur coat on the floor in front"
+imageCaption: "Women's clothing from several decades in the museum's collection."
 ---
 
 Some early Melrose hat makers were the Grein sisters (c1906), the Hart sisters (c1908), Tillie Latzka, Elizabeth Pickard, the Thoreson sisters, and Mrs. John Lampert. They worked out of their homes.
