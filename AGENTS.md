@@ -180,7 +180,7 @@ still fits one page.
 |---|---|
 | Project | `melrosemnhistory` (Direct Upload, production branch `main`), Cloudflare account "melrosemnhistory.com" |
 | Live site | <https://www.melrosemnhistory.com>. The `www` DNS record is a proxied CNAME to `melrosemnhistory.pages.dev`; custom domain attached to the project. |
-| Apex | `melrosemnhistory.com` is still an A record to the old web2 server, which 301s to `www`. If web2 is ever retired, replace this with a Cloudflare Redirect Rule (apex -> www) first. |
+| Apex | `melrosemnhistory.com` -> `https://www.melrosemnhistory.com` is handled **at Cloudflare's edge** by a zone Redirect Rule named "apex-redirect" (301, keeps path and query string, so `melrosemnhistory.com/museum.html` ends at `/visit/` via the `_redirects` rules). The web2 server is not involved. The apex `A` record (proxied, `138.197.231.246`) must stay *proxied* for the rule to run, but it never reaches the origin, so it can point anywhere (e.g. `192.0.2.1`) once web2 is retired. |
 | Other DNS | Mail (Google MX/SPF/DKIM), `staging`, `mail`, `ftp`, `ssh`, `autoconfig`, `autodiscover` records are unchanged. `staging.melrosemnhistory.com` still points at web2. |
 | Preview | `scripts/deploy.sh preview` -> <https://preview.melrosemnhistory.pages.dev> (noindex, not counted in analytics) |
 | Deploy to live | `scripts/deploy.sh production` (builds, runs `npm run verify`, uploads `dist/` with Wrangler). **This replaces the live site.** Run `preview` first for anything risky. |
