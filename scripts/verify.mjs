@@ -50,6 +50,19 @@ for (const f of htmlFiles) {
     if (frag && target.endsWith('.html') && !idsByFile.get(target)?.has(frag)) problems.push(`${rel}: missing anchor ${u}`);
   }
 }
+// An indexable build (robots.txt allows crawling) must not carry noindex, and every page needs a canonical URL.
+const robots = existsSync(join(dist, 'robots.txt')) ? readFileSync(join(dist, 'robots.txt'), 'utf8') : '';
+const indexable = /^Allow:\s*\/\s*$/m.test(robots);
+if (indexable) {
+  for (const f of htmlFiles) {
+    const rel = f.slice(dist.length + 1);
+    const html = readFileSync(f, 'utf8');
+    if (/<meta name="robots" content="noindex"/.test(html)) problems.push(`${rel}: has noindex but robots.txt allows crawling`);
+    if (rel !== '404.html' && !/<link rel="canonical" href="https?:\/\/[^"]+"/.test(html)) problems.push(`${rel}: missing canonical URL (set SITE_URL for the build)`);
+  }
+} else {
+  console.warn('note: this is a noindex/staging build (robots.txt disallows crawling). Do not deploy it to production.');
+}
 for (const need of ['index.html', '404.html', 'robots.txt', 'sitemap.xml', '_redirects']) {
   if (!existsSync(join(dist, need))) problems.push(`dist/${need} is missing`);
 }

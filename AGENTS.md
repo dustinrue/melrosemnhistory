@@ -207,7 +207,7 @@ Environment variables (see `.env.example`; set in the host dashboard or CI, not 
 
 | Variable | Purpose |
 |---|---|
-| `SITE_URL` | Absolute site URL, used for `sitemap.xml` and `robots.txt`. |
+| `SITE_URL` | Canonical origin for canonical links, social-preview tags, `sitemap.xml` and `robots.txt`. Defaults to `https://www.melrosemnhistory.com`; set it only for previews on another host. |
 | `SITE_BASE` | Only when served from a sub-path (previews), e.g. `/mockups/preview/`. Leave unset in production. |
 | `PUBLIC_NOINDEX` | `true` on staging/preview builds: adds `noindex` and a `Disallow: /` robots.txt. **Unset in production.** |
 | `PUBLIC_UMAMI_SRC`, `PUBLIC_UMAMI_ID` | Enables the self-hosted Umami analytics snippet (both required). `scripts/deploy.sh production` sets them (the same values the old site used); staging/preview builds do not, so they are not counted. These are build-time variables: with Direct Upload, Cloudflare dashboard variables are **not** used, so change them in the script or the shell. |

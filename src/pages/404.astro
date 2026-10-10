@@ -5,7 +5,7 @@ import { url } from '../lib/site';
 import { pages } from '../lib/data';
 const meta = pages.notFound;
 ---
-<Base title={meta.title} description={meta.description}>
+<Base title={meta.title} description={meta.description} noCanonical>
   <PageHero h1={meta.h1!} />
   <div class="page"><div class="wrap"><div class="prose">
     <p>Sorry — we couldn’t find that page. It may have moved when the site was redesigned.</p>

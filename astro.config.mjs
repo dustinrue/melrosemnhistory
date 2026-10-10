@@ -6,13 +6,14 @@ import site from './src/data/site.json' with { type: 'json' };
 import volunteer from './src/data/volunteer.json' with { type: 'json' };
 
 // Where the site is served from. Defaults suit a site at the root of its own domain.
-//   SITE_URL  e.g. https://www.melrosemnhistory.com   (used for the sitemap)
+//   SITE_URL  canonical origin used for canonical links, social previews, sitemap.xml and robots.txt.
+//             Defaults to the live domain; previews on another host (pages.dev, staging) override it.
 //   SITE_BASE e.g. /mockups/preview/                   (only for sub-path previews)
 const base = process.env.SITE_BASE || '/';
 
 // https://astro.build/config
 export default defineConfig({
-  site: process.env.SITE_URL || undefined,
+  site: process.env.SITE_URL || 'https://www.melrosemnhistory.com',
   base,
   trailingSlash: 'always',
   build: { format: 'directory' },
