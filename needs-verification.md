@@ -9,7 +9,7 @@ issues should settle most of the Gallagher items.
 **How to resolve an item:** verify it, edit the story file listed, delete the item from this file, and say what the source
 was in the commit message. Items must stay listed here until then.
 
-Last updated: October 2026.
+Last updated: October 2026 (item 6 added).
 
 ---
 
@@ -65,6 +65,23 @@ Last updated: October 2026.
   large home that Pallansch had built, or something else.
 - **To verify:** ask someone at the Society who knows the building's history, or the Beacon / parish records.
 - **Proposed fix once confirmed:** rewrite to the confirmed facts.
+
+## 6. How and when the Society got the building: 1998 gift vs. 2000 lease
+
+- **Where:** three places on the site disagree:
+  - `src/content/stories/convents.md`, second paragraph: "It was purchased by the city of Melrose in **December 1998** and
+    **given** to the Melrose Area Historical Society for use as a museum."
+  - `src/content/sections/about-history.md`, third paragraph: "A year later, in **2000**, there were no interested buyers. At
+    this time the City of Melrose acquired the building and **leased** it to the Society for the museum."
+  - `src/data/timeline.json`, year 1998 ("The City of Melrose purchases Mary Hall and **gives** it to the Historical Society").
+    This entry follows the Convents story; the About history paragraph says otherwise.
+- **Concern:** the original website contradicted itself (the Convents story on `collections.html` vs. `museumhistory.html`).
+  The two accounts differ on the year (1998 vs. 2000) and on the arrangement (gift vs. lease). Both versions were migrated
+  as written, so the site currently says both.
+- **To verify:** city council minutes, the Society's own records, or the Melrose Beacon (Dec 1998 and 1999-2000). The 2001
+  move-in date is consistent with either.
+- **Proposed fix once confirmed:** make the Convents story, the About history paragraph and the 1998 timeline entry (change
+  its year/wording if needed) say the same thing.
 
 ---
 
