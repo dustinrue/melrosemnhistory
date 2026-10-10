@@ -123,7 +123,10 @@ To add a story: copy an existing file, change the fields and text. Stories appea
 Do not rename an existing story file (it would break links and the redirects).
 
 ### Lists, people and products
-- **Family / oral / video histories:** `src/data/lists/*.txt`, one entry per line, alphabetical by surname. Duplicates fail the build.
+- **Family / oral / video histories:** `src/data/lists/*.txt`, one entry per line. Keep them alphabetized: family histories by
+  surname (the entry already starts with it); oral histories by the **interviewee's surname** even though entries read
+  "First Last" (for pairs, the first-listed person; e.g. "Albert & Marie Primus" sorts under P); videos by title, ignoring
+  leading quotation marks and "The". Duplicates fail the build.
   The counts shown on the Research page update automatically. The lists are plain static text (there is no search box).
 - **Board:** `src/data/board.json` (`officers` have `role` + `name`; `directors` is a list of names).
 - **Membership levels:** `src/data/membership.json`. `kind` is `annual` or `giving`; one level may have `"featured": true`.
