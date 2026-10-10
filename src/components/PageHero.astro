@@ -1,9 +1,9 @@
 ---
 import { url } from '../lib/site';
-interface Props { h1: string; lede?: string }
-const { h1, lede } = Astro.props;
+interface Props { h1: string; lede?: string; printHide?: boolean }
+const { h1, lede, printHide = false } = Astro.props;
 ---
-<div class="page-hero"><div class="wrap">
+<div class:list={['page-hero', { 'print-hide': printHide }]}><div class="wrap">
   <nav class="crumbs" aria-label="Breadcrumb"><a href={url('')}>Home</a></nav>
   <h1>{h1}</h1>
   {lede && <p class="lede">{lede}</p>}

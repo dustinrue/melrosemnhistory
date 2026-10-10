@@ -25,4 +25,5 @@ and how to publish. It is written for AI coding agents and humans alike.
 | A collection story | `src/content/stories/*.md` |
 | Board, membership levels, timeline, books | `src/data/*.json` |
 | Family / oral / video history lists | `src/data/lists/*.txt` |
+| Volunteer areas, donation types (also print on the form) | `src/data/volunteer.json` |
 | Photos | `src/assets/photos/` |

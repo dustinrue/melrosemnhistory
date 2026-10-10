@@ -7,6 +7,9 @@
     });
     document.addEventListener('keydown',function(ev){ if(ev.key==='Escape'&&nav.classList.contains('open')){nav.classList.remove('open');btn.setAttribute('aria-expanded','false');btn.focus();}});
   }
+  document.querySelectorAll('[data-print]').forEach(function(b){
+    b.hidden=false; b.addEventListener('click',function(){window.print();});
+  });
   var inp=document.querySelector('input[data-filter]');
   if(inp){
     var lists=[].slice.call(document.querySelectorAll(inp.dataset.filter)),

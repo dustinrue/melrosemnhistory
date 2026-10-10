@@ -1,0 +1,37 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import FormSheet from '../../components/FormSheet.astro';
+import { site, phoneDigits, url } from '../../lib/site';
+import { pages, membership } from '../../lib/data';
+
+const meta = pages.membershipForm;
+---
+<Base title={meta.title} description={meta.description} current="involved">
+  <PageHero h1={meta.h1!} lede={meta.lede} printHide />
+  <div class="page"><div class="wrap">
+    <div class="form-tools no-print">
+      <button class="btn solid" type="button" data-print hidden>Print this form</button>
+      <a class="btn outline" href={url('get-involved/#membership')}>Back to membership</a>
+    </div>
+
+    <FormSheet title="Membership Application" instruction="Print this form, then fill it out and mail with your check to:">
+      <Fragment slot="contact">Call <a href={`tel:${phoneDigits}`}>{site.phone}</a> or email <a href={`mailto:${site.email}`}>{site.email}</a> for more info</Fragment>
+
+      <p class="form-prompt">Please check one:</p>
+      <ul class="checklist inline">
+        <li><span class="box" aria-hidden="true"></span>New</li>
+        <li><span class="box" aria-hidden="true"></span>Renewal</li>
+      </ul>
+
+      <p class="form-prompt">Membership level:</p>
+      <ul class="checklist">
+        {membership.levels.map((l) => (
+          <li><span class="box" aria-hidden="true"></span><span>{l.name} <b>{l.price}</b> <small>{l.period}</small></span></li>
+        ))}
+      </ul>
+
+      <div class="form-line"><span class="lbl">Additional donation $</span><span class="line short"></span></div>
+    </FormSheet>
+  </div></div>
+</Base>

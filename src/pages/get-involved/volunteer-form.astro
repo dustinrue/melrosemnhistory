@@ -1,0 +1,32 @@
+---
+import Base from '../../layouts/Base.astro';
+import PageHero from '../../components/PageHero.astro';
+import FormSheet from '../../components/FormSheet.astro';
+import { site, phoneDigits, url } from '../../lib/site';
+import { pages, volunteer } from '../../lib/data';
+
+const meta = pages.volunteerForm;
+---
+<Base title={meta.title} description={meta.description} current="involved">
+  <PageHero h1={meta.h1!} lede={meta.lede} printHide />
+  <div class="page"><div class="wrap">
+    <div class="form-tools no-print">
+      <button class="btn solid" type="button" data-print hidden>Print this form</button>
+      <a class="btn outline" href={url('get-involved/#volunteer')}>Back to volunteering</a>
+    </div>
+
+    <FormSheet title="I would like to volunteer!" instruction="Print this form, then fill it out and mail to:">
+      <Fragment slot="contact">Or call <a href={`tel:${phoneDigits}`}>{site.phone}</a> or email responses to <a href={`mailto:${site.email}`}>{site.email}</a></Fragment>
+
+      <p class="form-prompt">I would like to volunteer time. Please check area(s) of interest:</p>
+      <ul class="checklist">
+        {volunteer.areas.map((a) => <li><span class="box" aria-hidden="true"></span><span>{a}</span></li>)}
+      </ul>
+
+      <p class="form-prompt">I would like to donate to the collection. Contact me about the following:</p>
+      <ul class="checklist">
+        {volunteer.donations.map((d) => <li><span class="box" aria-hidden="true"></span><span>{d}</span></li>)}
+      </ul>
+    </FormSheet>
+  </div></div>
+</Base>

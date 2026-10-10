@@ -16,5 +16,9 @@
 /volunteers.html       /get-involved/#volunteer    301
 /museumhistory.html    /about/#history             301
 /directors.html        /about/#board               301
-/images/membership.pdf    /files/membership-form.pdf 301
-/images/volunteerform.pdf /files/volunteer-form.pdf  301
+# Old downloadable forms are now print-friendly pages.
+/images/membership.pdf    /get-involved/membership-form/ 301
+/images/volunteerform.pdf /get-involved/volunteer-form/  301
+/images/volunteerform.jpg /get-involved/volunteer-form/  301
+/files/membership-form.pdf /get-involved/membership-form/ 301
+/files/volunteer-form.pdf  /get-involved/volunteer-form/  301

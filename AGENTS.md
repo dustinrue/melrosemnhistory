@@ -19,7 +19,7 @@ The design was built once and approved. Day-to-day updates must **never** alter 
 
 | Zone | Paths | Who edits it | Rule |
 |---|---|---|---|
-| **Content** (safe) | `src/data/**`, `src/content/**`, `src/assets/photos/**`, `public/files/**` | Anyone, including AI agents | Edit freely, following section 5. The build validates it. |
+| **Content** (safe) | `src/data/**`, `src/content/**`, `src/assets/photos/**` | Anyone, including AI agents | Edit freely, following section 5. The build validates it. |
 | **Design** (locked) | `src/layouts/**`, `src/components/**`, `src/styles/**`, `src/pages/**`, `src/lib/**`, `src/scripts/**`, `src/content.config.ts`, `astro.config.mjs` | Only when the owner asks for a design or structure change | Do not touch for content work. If a content request seems to need a design change, **stop and ask**. |
 | **Navigation** | `src/lib/nav.ts` | Owner decision | Adding/removing menu items is a structural change. |
 | **Redirects** | `public/_redirects` | Rarely | Only append when a page is renamed/removed. |
@@ -55,19 +55,20 @@ src/
     board.json            officers and directors
     books.json            museum store book list
     gallery.json          captioned photos on the Visit page
+    volunteer.json        volunteer areas + donation types (shown on Get Involved AND printed on the volunteer form)
     lists/*.txt           research lists, one entry per line
   content/              PROSE (Markdown)                           <- content zone
     sections/*.md         page text blocks (visit-visiting.md, about-mission.md, ...)
     stories/*.md          the 8 collection stories
   assets/photos/        photographs (any size; the build resizes + converts to WebP)
   layouts/Base.astro    <head>, top strip, header/nav, footer, analytics      <- design zone
-  components/           Photo, PageHero, StorySection, Timeline, ...           <- design zone
+  components/           Photo, PageHero, StorySection, Timeline, FormSheet, ...  <- design zone
   pages/                one .astro file per page + 404, robots.txt, sitemap    <- design zone
+    get-involved/membership-form.astro, volunteer-form.astro   printable forms
   styles/global.css     the entire stylesheet                                  <- design zone
   lib/                  helpers, data validation (zod schemas), markdown plugin <- design zone
   scripts/site.js       mobile menu + research-list filter                     <- design zone
 public/
-  files/                PDFs (membership-form.pdf, volunteer-form.pdf)        <- content zone
   favicon.svg, _redirects
 scripts/verify.mjs      post-build checks
 tools/visual-diff/      optional screenshot comparison (section 9)
@@ -107,6 +108,9 @@ Markdown you may use: paragraphs, **bold**, *italic*, links, bullet lists, `###`
 `{{phone}}` `{{phone_digits}}` (for `tel:` links) `{{email}}` `{{address1}}` `{{city}}` `{{name}}` `{{hours}}`
 `{{hoursSeason}}` `{{facebook}}`. Example: `call [{{phone}}](tel:{{phone_digits}})`. An unknown token fails the build.
 
+**List markers:** a paragraph containing only `{{list:volunteer_areas}}` or `{{list:donation_types}}` is replaced by a bullet
+list built from `src/data/volunteer.json`. The same data prints on the volunteer form, so the website and the form cannot disagree.
+
 **Links:** to another page of this site use a root-relative path (`[Visit](/visit/)`, `[the store](/visit/#store)`); the build
 adds any base path. Always end page links with `/`. External links use the full `https://…` URL.
 
@@ -124,6 +128,8 @@ Do not rename an existing story file (it would break links and the redirects).
 - **Store books:** `src/data/books.json` (`title`, `subtitle` may be an empty string).
 - **Timeline:** `src/data/timeline.json`, chronological. Home teases the years listed in `home.json` → `timeline.years`
   (each must exist in `timeline.json`).
+- **Volunteer areas / donation types:** `src/data/volunteer.json` (`areas`, `donations`). Updates the Get Involved page text and the
+  printable volunteer form together.
 - **Home page copy:** `src/data/home.json` (plain text only, no HTML).
 
 ### Photos
@@ -133,9 +139,14 @@ Do not rename an existing story file (it would break links and the redirects).
 3. Always write meaningful `alt` text describing what is shown (not "photo of…"). Decorative-only images are a design decision.
 4. Only the Society's own photos or ones the owner confirms are licensed. Stock images from the old site were deliberately **not** carried over.
 
-### PDFs
-Put in `public/files/` with kebab-case names. Link text must say it is a PDF. The membership form is linked from
-`involved-join.md` and `src/pages/get-involved.astro` (button) — if you rename the file, update both.
+### Printable forms (replaced the old PDFs)
+There are no PDF files. `/get-involved/membership-form/` and `/get-involved/volunteer-form/` are normal pages designed to print on
+one US Letter page (site header/footer are hidden when printing; the "Print this form" button appears when JavaScript is on, and
+Ctrl/Cmd+P works regardless). They are **generated from data**: address/phone/email from `site.json`, membership levels and
+prices from `membership.json`, volunteer areas and donation types from `volunteer.json`. Changing those files updates the
+website and the printed forms together. Only the form wording and field layout live in the page templates
+(`src/pages/get-involved/*-form.astro`, design zone). After editing a form template, print-preview it (or `Cmd+P`) and confirm it
+still fits one page.
 
 ## 6. Content and tone rules
 
@@ -242,16 +253,16 @@ jobs:
 
 Content carried over from the 2013-era site that may be stale or inconsistent. Do not silently "fix"; ask.
 
-1. **Phone number.** The site publishes **320-256-4996** everywhere (single source: `phone` in `src/data/site.json`).
-   *Reference:* the old site also used **320-256-3933** on the hours, store and volunteer pages and in both PDF forms; the owner
-   says that number **rings to a specific person**, so it must not be published as the general number. Keep it here for
-   reference only. **Both PDF forms (`public/files/membership-form.pdf`, `volunteer-form.pdf`) still print 320-256-3933** and
-   should be re-exported with 320-256-4996 (the original Illustrator files, `membership.ai` and `volunteerform.ai`, are in the
-   legacy `images/` folder, outside this repo). Until then the printed forms disagree with the website.
-2. **Email:** confirmed by the owner as `rpaschke@meltel.com` (the old website HTML said `.net`, which was wrong). The site and
-   both PDF forms now agree. Consider a role address (e.g. info@) eventually.
-3. **Hours, admission, membership prices** date from ~2013 and are unconfirmed. Owner has deferred checking them. The PDF forms
-   repeat the prices (and the phone, see item 1), so update them together when confirmed.
+1. **Phone number (resolved).** The site publishes **320-256-4996** everywhere (single source: `phone` in `src/data/site.json`),
+   including the printable forms. *Reference only:* the old site also used **320-256-3933** on the hours, store and volunteer
+   pages and in the old PDF forms; the owner says that number **rings to a specific person**, so it must not be published as
+   the general number.
+2. **Email (resolved):** confirmed by the owner as `rpaschke@meltel.com` (the old website HTML said `.net`, which was wrong).
+   Consider a role address (e.g. info@) eventually.
+   **Address (resolved):** `518 2nd St SE`. Melrose changed to the SE address format; the old volunteer PDF's "518 E Second Street S"
+   is outdated.
+3. **Hours, admission, membership prices** date from ~2013 and are unconfirmed. Owner has deferred checking them. Prices feed the
+   website and the printable form from `membership.json`, so one edit updates both.
 4. **Board list** is from the old site (a person was removed and one added at the owner's request); confirm it is current.
 5. **Unverified source wording** kept as written: "F-882 fighter planes" (Gallagher story), "Wapeton Dakota" (likely
    "Wahpeton"), and a sentence in the Convents story that was ungrammatical in the original ("had a convent in a large home
@@ -259,4 +270,6 @@ Content carried over from the 2013-era site that may be stale or inconsistent. D
 6. **Typos fixed during migration** (so nobody "re-fixes" them): Walter Haut, August Kuhlmann, *Spirit* of St. Louis,
    Chronicle, Fort Worth, Woodland Period, Hetzel, Lake Wobegon.
 7. **Fonts** load from Google Fonts. Self-hosting would remove the third-party request.
-8. **Legacy source files** (original HTML, PSDs, stock photos) are intentionally not in this repository.
+8. **Legacy source files** (original HTML, PSDs, stock photos, the old PDFs) are intentionally not in this repository.
+9. **Volunteer areas / donation types** on the forms were taken from the old volunteer PDF plus the old Volunteer page text (the
+   form now also offers "Organizing displays"). Confirm the list matches what the Society actually wants.

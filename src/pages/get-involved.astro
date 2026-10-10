@@ -11,7 +11,6 @@ const join = await section('involved-join');
 const volunteer = await section('involved-volunteer');
 const annual = membership.levels.filter((l) => l.kind === 'annual');
 const giving = membership.levels.filter((l) => l.kind === 'giving');
-const pdf = (n: string) => url(`files/${n}`);
 ---
 <Base title={meta.title} description={meta.description} current="involved">
   <PageHero h1={meta.h1!} lede={meta.lede} />
@@ -46,7 +45,7 @@ const pdf = (n: string) => url(`files/${n}`);
       </div>
       <p class="prose" style="margin-top:20px">Higher levels include all of the benefits above, plus the recognition listed.</p>
       <join.Content />
-      <p><a class="btn solid" href={pdf('membership-form.pdf')}>Download the membership form (PDF)</a></p>
+      <p><a class="btn solid" href={url('get-involved/membership-form/')}>Print the membership form</a></p>
     </section>
 
     <StorySection id="volunteer" title={volunteer.data.title}>
@@ -55,7 +54,7 @@ const pdf = (n: string) => url(`files/${n}`);
         <div class="aside-card"><h3>Ready to sign up?</h3>
           <p>Print the volunteer form, fill it out and mail it to:</p>
           <p>{site.name}<br>{site.address1}<br>{site.city}</p>
-          <p><a class="btn solid" href={pdf('volunteer-form.pdf')}>Volunteer form (PDF)</a></p>
+          <p><a class="btn solid" href={url('get-involved/volunteer-form/')}>Print the volunteer form</a></p>
         </div>
       </Fragment>
     </StorySection>

@@ -1,0 +1,25 @@
+---
+// A printable paper form: letterhead + the standard contact blanks. Page-specific sections go in the default slot.
+// Facts (name, address, phone, email) come from site.json, so a printed form can never disagree with the site.
+import { site } from '../lib/site';
+
+interface Props {
+  title: string;
+  /** e.g. "Print this form, then fill it out and mail with your check to:" */
+  instruction: string;
+}
+const { title, instruction } = Astro.props;
+---
+<article class="form-sheet">
+  <h2>{title}</h2>
+  <p class="form-instructions">{instruction}</p>
+  <address class="form-address">{site.name}<br>{site.address1}<br>{site.city}</address>
+  <p class="form-contact"><slot name="contact" /></p>
+  <div class="form-fields">
+    <div class="form-line"><span class="lbl">Name</span><span class="line"></span></div>
+    <div class="form-line"><span class="lbl">Address</span><span class="line"></span></div>
+    <div class="form-line"><span class="lbl">City</span><span class="line"></span><span class="lbl">State</span><span class="line short"></span><span class="lbl">Zip</span><span class="line short"></span></div>
+    <div class="form-line"><span class="lbl">Telephone</span><span class="line"></span><span class="lbl">Email</span><span class="line"></span></div>
+  </div>
+  <slot />
+</article>

@@ -8,6 +8,7 @@ import booksRaw from '../data/books.json';
 import homeRaw from '../data/home.json';
 import pagesRaw from '../data/pages.json';
 import galleryRaw from '../data/gallery.json';
+import volunteerRaw from '../data/volunteer.json';
 import siteRaw from '../data/site.json';
 
 const nonEmpty = z.string().min(1);
@@ -67,3 +68,8 @@ export const pages = z.record(pageMeta).parse(pagesRaw);
 export const gallery = z.object({
   visit: z.array(z.object({ image: nonEmpty, alt: nonEmpty, caption: nonEmpty })).min(1),
 }).parse(galleryRaw);
+
+export const volunteer = z.object({
+  areas: z.array(nonEmpty).min(1),
+  donations: z.array(nonEmpty).min(1),
+}).parse(volunteerRaw);
