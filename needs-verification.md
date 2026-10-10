@@ -97,6 +97,18 @@ either omits them or leaves them out of the site text. Verify before adding them
   from ... Melrose Beacon office" plus several names, but the text is too small to read reliably in the photo.
 - **To verify:** read that caption in person; then add when and from where the machine came, and who moved it.
 
+## 9. New display stories written from photos (train station, sports, toys)
+
+Short placeholder introductions written only from what is visible; they contain no dates, owners or local claims. Fill in
+with real history when available.
+
+- `src/content/stories/train-station.md`: names Great Northern and Burlington Northern from the memorabilia. The display
+  mentions a roundhouse plan (Sanborn map) and "G.N. yards, Melrose" photos; the town's actual rail history is not written.
+- `src/content/stories/sports.md`: the display has Olympic/Team USA items and a label naming **Jan Niehaus Herke** and
+  **Jan Ettle** with "recognition posters for pro women athletes 2019". The story does not name anyone or say which local
+  athletes competed. **Confirm who is honored, in what sport, and add them.**
+- `src/content/stories/toys-games.md`: lists only items visible in the case.
+
 ---
 
 ## Checked and resolved (kept for reference)
