@@ -19,8 +19,10 @@ interface Props {
   first?: boolean;
   /** Output width of the photo. */
   photoWidth?: number;
+  /** Extra photos shown as a row below the text. */
+  gallery?: { image: string; alt: string; caption?: string }[];
 }
-const { id, title, image, imageAlt = '', imageCaption, image2, image2Alt = '', headingInside = false, wide = false, first = false, photoWidth = 1000 } = Astro.props;
+const { id, title, image, imageAlt = '', imageCaption, image2, image2Alt = '', headingInside = false, wide = false, first = false, photoWidth = 1000, gallery = [] } = Astro.props;
 const hasAside = Boolean(image) || Astro.slots.has('aside');
 ---
 <section id={id} class="story-sec" style={first ? 'border-top:0;padding-top:0' : undefined}>
@@ -47,6 +49,16 @@ const hasAside = Boolean(image) || Astro.slots.has('aside');
     <div class="prose">
       {title && headingInside && <h2>{title}</h2>}
       <slot />
+    </div>
+  )}
+  {gallery.length > 0 && (
+    <div class="photo-row">
+      {gallery.map((g) => (
+        <figure>
+          <Photo name={g.image} alt={g.alt} width={1000} />
+          {g.caption && <figcaption>{g.caption}</figcaption>}
+        </figure>
+      ))}
     </div>
   )}
   <slot name="after" />
