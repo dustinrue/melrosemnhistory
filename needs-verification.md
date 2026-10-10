@@ -9,7 +9,7 @@ issues should settle most of the Gallagher items.
 **How to resolve an item:** verify it, edit the story file listed, delete the item from this file, and say what the source
 was in the commit message. Items must stay listed here until then.
 
-Last updated: October 2026.
+Last updated: October 2026. (CI test edit, not merged.)
 
 ---
 
