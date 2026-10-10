@@ -1,0 +1,11 @@
+---
+interface Props { items: { year: string; title: string; text: string }[] }
+const { items } = Astro.props;
+---
+<div class="tl">
+  {items.map((e, i) => (
+    <div class:list={['tl-item', { now: i === items.length - 1 }]}>
+      <div class="yr">{e.year}</div><h3>{e.title}</h3><p>{e.text}</p>
+    </div>
+  ))}
+</div>

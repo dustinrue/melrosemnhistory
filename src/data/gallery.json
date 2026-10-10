@@ -1,0 +1,19 @@
+{
+  "visit": [
+    {
+      "image": "parlor.webp",
+      "alt": "Parlor exhibit with an old radio, armchair and table",
+      "caption": "A period parlor"
+    },
+    {
+      "image": "school.webp",
+      "alt": "Schoolroom exhibit",
+      "caption": "The schoolroom"
+    },
+    {
+      "image": "toys.webp",
+      "alt": "Display of toy pistols and a blue hat",
+      "caption": "Toys and local memorabilia"
+    }
+  ]
+}

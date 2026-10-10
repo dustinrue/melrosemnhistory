@@ -1,0 +1,10 @@
+---
+import { url } from '../lib/site';
+interface Props { h1: string; lede?: string }
+const { h1, lede } = Astro.props;
+---
+<div class="page-hero"><div class="wrap">
+  <nav class="crumbs" aria-label="Breadcrumb"><a href={url('')}>Home</a></nav>
+  <h1>{h1}</h1>
+  {lede && <p class="lede">{lede}</p>}
+</div></div>

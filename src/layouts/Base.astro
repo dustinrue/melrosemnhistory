@@ -1,0 +1,75 @@
+---
+// The only place <head>, header, navigation, footer and analytics exist.
+import '../styles/global.css';
+import { site, phoneDigits, url } from '../lib/site';
+import { nav, joinPath, type NavKey } from '../lib/nav';
+
+interface Props {
+  title: string;
+  description: string;
+  current?: NavKey;
+  home?: boolean;
+}
+const { title, description, current, home = false } = Astro.props;
+const fullTitle = home ? title : `${title} · ${site.name}`;
+const noindex = import.meta.env.PUBLIC_NOINDEX === 'true';
+const umamiId = import.meta.env.PUBLIC_UMAMI_ID;
+const umamiSrc = import.meta.env.PUBLIC_UMAMI_SRC;
+const year = new Date().getFullYear();
+---
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>{fullTitle}</title>
+<meta name="description" content={description}>
+{noindex && <meta name="robots" content="noindex">}
+<link rel="icon" href={url('favicon.svg')} type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,700&family=Source+Sans+3:wght@400;600&display=swap" rel="stylesheet">
+{umamiId && umamiSrc && <script async src={umamiSrc} data-website-id={umamiId}></script>}
+</head>
+<body>
+<a class="skip" href="#main">Skip to content</a>
+<div class="strip"><div class="wrap">
+  <span>Open {site.hours}<span class="m-hide">, {site.hoursSeason} · {site.hoursNote}</span></span>
+  <span><a href={`tel:${phoneDigits}`}>{site.phone}</a></span>
+</div></div>
+
+<header class="site"><div class="wrap">
+  <a class="brand" href={url('')}>
+    <span>Melrose Area<br>Historical Society<small>{site.tagline}</small></span>
+  </a>
+  <button class="menu-btn" aria-expanded="false" aria-controls="primary-nav">Menu</button>
+  <nav id="primary-nav" aria-label="Main"><ul>
+    {nav.map((item) => (
+      <li><a href={url(item.path)} aria-current={current === item.key ? 'page' : undefined}>{item.label}</a></li>
+    ))}
+    <li><a class="cta" href={url(joinPath)}>Join</a></li>
+  </ul></nav>
+</div></header>
+
+<main id="main">
+  <slot />
+</main>
+
+<footer><div class="wrap">
+  <div class="cols">
+    <div><h4>{site.name}</h4>
+      <p>{site.address1}<br>{site.city}<br><a href={`tel:${phoneDigits}`}>{site.phone}</a><br><a href={`mailto:${site.email}`}>{site.email}</a></p>
+      <p><a href={site.facebook} rel="noopener">Follow us on Facebook</a></p>
+      <p>{site.affiliation}</p></div>
+    <div><h4>Explore</h4><ul>
+      <li><a href={url('visit/')}>Visit</a></li><li><a href={url('visit/#store')}>Museum Store</a></li><li><a href={url('collections/')}>Collections</a></li>
+      <li><a href={url('research/')}>Research Center</a></li><li><a href={url('about/')}>About the Society</a></li></ul></div>
+    <div><h4>Get involved</h4><ul>
+      <li><a href={url('get-involved/#membership')}>Membership</a></li><li><a href={url('get-involved/#volunteer')}>Volunteer</a></li><li><a href={url('about/#board')}>Board of Directors</a></li></ul></div>
+  </div>
+  <div class="fine">© {year} {site.name}</div>
+</div></footer>
+<script>
+  import '../scripts/site.js';
+</script>
+</body>
+</html>

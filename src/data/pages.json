@@ -1,0 +1,9 @@
+{
+  "home":        { "title": "Melrose Area Historical Society — Museum & Heritage Center", "description": "Museum, research center and historical society preserving the history and heritage of Melrose, Minnesota and the School District 740 communities." },
+  "visit":       { "title": "Visit the Museum", "description": "Hours, admission, directions, what to see and the museum store at the Melrose Area Museum, housed in the former Melrose convent near St. Mary's Church.", "h1": "Visit the museum", "lede": "Everything you need to plan your trip — and a peek at what’s inside." },
+  "collections": { "title": "Collections", "description": "Stories and artifacts from the Melrose Area Museum: Native Americans, the hospital, convents, milliners, Capt. James Gallagher, Francis Lent, the Melrose Theater and the Lindberghs.", "h1": "Collections", "lede": "More than 2,000 indexed items and the stories behind them." },
+  "research":    { "title": "Research Center", "description": "Search family histories, oral history tapes, video histories, newspaper articles, obituaries and photographs at the Melrose Area Museum research center.", "h1": "Research Center", "lede": "Trace your family and the history of the Melrose area." },
+  "involved":    { "title": "Get Involved", "description": "Join the Melrose Area Historical Society or volunteer at the Melrose Area Museum.", "h1": "Get involved", "lede": "Join the Society or lend a hand at the museum." },
+  "about":       { "title": "About the Society", "description": "The mission, history, building and board of the Melrose Area Historical Society, an affiliate of the Stearns County Historical Society.", "h1": "About the Society", "lede": "Preserving the history and heritage of the Melrose area since 1987." },
+  "notFound":    { "title": "Page not found", "description": "That page could not be found.", "h1": "Page not found" }
+}

@@ -1,0 +1,63 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import StorySection from '../components/StorySection.astro';
+import { site, url } from '../lib/site';
+import { pages, membership } from '../lib/data';
+import { section } from '../lib/content';
+
+const meta = pages.involved;
+const join = await section('involved-join');
+const volunteer = await section('involved-volunteer');
+const annual = membership.levels.filter((l) => l.kind === 'annual');
+const giving = membership.levels.filter((l) => l.kind === 'giving');
+const pdf = (n: string) => url(`files/${n}`);
+---
+<Base title={meta.title} description={meta.description} current="involved">
+  <PageHero h1={meta.h1!} lede={meta.lede} />
+  <div class="page"><div class="wrap">
+    <ul class="jump" aria-label="On this page">
+      <li><a href="#membership">Membership</a></li><li><a href="#volunteer">Volunteer</a></li>
+    </ul>
+
+    <section id="membership" class="story-sec" style="border-top:0;padding-top:0">
+      <h2>Become a member</h2>
+      <div class="benefits">
+        <h3 style="font-size:24px;color:#fff">Every membership includes</h3>
+        <ul>{membership.benefits.map((b) => <li>{b}</li>)}</ul>
+      </div>
+      <h3 style="font-size:22px">Annual memberships</h3>
+      <div class="members">
+        {annual.map((l) => (
+          <article class:list={['level', { feature: l.featured }]}>
+            <h3>{l.name}</h3><div class="price">{l.price}</div><div class="per">{l.period}</div>
+            {l.perks.length > 0 && <ul>{l.perks.map((p) => <li>{p}</li>)}</ul>}
+          </article>
+        ))}
+      </div>
+      <h3 style="font-size:22px;margin-top:32px">Giving levels (one-time donation)</h3>
+      <div class="members">
+        {giving.map((l) => (
+          <article class="level">
+            <h3>{l.name}</h3><div class="price">{l.price}</div><div class="per">{l.period}</div>
+            {l.perks.length > 0 && <ul>{l.perks.map((p) => <li>{p}</li>)}</ul>}
+          </article>
+        ))}
+      </div>
+      <p class="prose" style="margin-top:20px">Higher levels include all of the benefits above, plus the recognition listed.</p>
+      <join.Content />
+      <p><a class="btn solid" href={pdf('membership-form.pdf')}>Download the membership form (PDF)</a></p>
+    </section>
+
+    <StorySection id="volunteer" title={volunteer.data.title}>
+      <volunteer.Content />
+      <Fragment slot="aside">
+        <div class="aside-card"><h3>Ready to sign up?</h3>
+          <p>Print the volunteer form, fill it out and mail it to:</p>
+          <p>{site.name}<br>{site.address1}<br>{site.city}</p>
+          <p><a class="btn solid" href={pdf('volunteer-form.pdf')}>Volunteer form (PDF)</a></p>
+        </div>
+      </Fragment>
+    </StorySection>
+  </div></div>
+</Base>

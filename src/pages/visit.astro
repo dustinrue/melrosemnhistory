@@ -1,0 +1,62 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import StorySection from '../components/StorySection.astro';
+import AdmissionFees from '../components/AdmissionFees.astro';
+import { site, phoneDigits } from '../lib/site';
+import { pages, gallery, books } from '../lib/data';
+import { section } from '../lib/content';
+
+const meta = pages.visit;
+const visiting = await section('visit-visiting');
+const see = await section('visit-see');
+const store = await section('visit-store');
+---
+<Base title={meta.title} description={meta.description} current="visit">
+  <PageHero h1={meta.h1!} lede={meta.lede} />
+  <div class="page"><div class="wrap">
+    <div class="facts">
+      <div class="fact"><h2>Open hours</h2><div class="big">{site.hours}</div><p>{site.hoursDetail}.</p></div>
+      <div class="fact"><h2>Address</h2><div class="big">{site.address1}<br>{site.city}</div><p>{site.locationNote}</p></div>
+      <div class="fact"><h2>Call or write</h2><div class="big"><a href={`tel:${phoneDigits}`}>{site.phone}</a></div><p><a href={`mailto:${site.email}`}>{site.email}</a></p></div>
+      <div class="fact"><h2>Follow us</h2><div class="big"><a href={site.facebook} rel="noopener">Facebook</a></div><p>{site.followNote}</p></div>
+    </div>
+    <div class="split">
+      <div>
+        <section class="prose">
+          <h2>{visiting.data.title}</h2>
+          <visiting.Content />
+          <p><a class="btn solid" href={site.mapsUrl} rel="noopener">Get directions</a></p>
+        </section>
+        <section class="prose" id="see">
+          <h2>{see.data.title}</h2>
+          <see.Content />
+        </section>
+        <section>
+          <iframe class="map" title={`Map showing the Melrose Area Museum at ${site.address1}, Melrose`} src={site.mapEmbedUrl} loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+        </section>
+      </div>
+      <aside>
+        <div class="aside-card" style="margin-bottom:24px"><h2>Admission</h2><AdmissionFees /></div>
+        <figure>
+          <Photo name="museum.webp" alt="The Melrose Area Museum, a two-story brick building with a white entrance door" width={1600} />
+          <figcaption>Look for the brick building with the “Melrose Area Museum” lettering.</figcaption>
+        </figure>
+      </aside>
+    </div>
+    <div class="photo-row">
+      {gallery.visit.map((g) => <figure><Photo name={g.image} alt={g.alt} width={900} /><figcaption>{g.caption}</figcaption></figure>)}
+    </div>
+
+    <StorySection id="store" title={store.data.title} image={store.data.image} imageAlt={store.data.imageAlt} imageCaption={store.data.imageCaption} photoWidth={640}>
+      <store.Content />
+      <Fragment slot="after">
+        <h3 style="font-size:22px;margin-top:32px">Books and publications</h3>
+        <ul class="book-list" style="margin-top:14px">
+          {books.map((b) => <li><b>{b.title}</b>{b.subtitle && <span>{b.subtitle}</span>}</li>)}
+        </ul>
+      </Fragment>
+    </StorySection>
+  </div></div>
+</Base>

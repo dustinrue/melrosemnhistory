@@ -1,0 +1,6 @@
+---
+import { site } from '../lib/site';
+---
+<dl class="fees">
+  {site.admission.map((a) => <div><dt>{a.label}</dt><dd>{a.price}</dd></div>)}
+</dl>

@@ -1,0 +1,53 @@
+---
+// A titled block of prose with an optional photo or custom aside, used on most pages.
+// The default slot is the Markdown body; slot "aside" replaces the photo; slot "after" renders below.
+import Photo from './Photo.astro';
+
+interface Props {
+  id?: string;
+  title?: string;
+  image?: string;
+  imageAlt?: string;
+  imageCaption?: string;
+  image2?: string;
+  image2Alt?: string;
+  /** Put the heading inside the prose column (About page style) instead of above it. */
+  headingInside?: boolean;
+  /** Wider photo column. */
+  wide?: boolean;
+  /** First block on a page: no top rule. */
+  first?: boolean;
+  /** Output width of the photo. */
+  photoWidth?: number;
+}
+const { id, title, image, imageAlt = '', imageCaption, image2, image2Alt = '', headingInside = false, wide = false, first = false, photoWidth = 1000 } = Astro.props;
+const hasAside = Boolean(image) || Astro.slots.has('aside');
+---
+<section id={id} class="story-sec" style={first ? 'border-top:0;padding-top:0' : undefined}>
+  {title && !headingInside && <h2>{title}</h2>}
+  {hasAside ? (
+    <div class:list={['split', { 'wide-aside': wide }]}>
+      <div class="prose">
+        {title && headingInside && <h2>{title}</h2>}
+        <slot />
+      </div>
+      <aside>
+        {image ? (
+          <>
+            <figure>
+              <Photo name={image} alt={imageAlt} width={photoWidth} />
+              {imageCaption && <figcaption>{imageCaption}</figcaption>}
+            </figure>
+            {image2 && <figure style="margin-top:20px"><Photo name={image2} alt={image2Alt} width={photoWidth} /></figure>}
+          </>
+        ) : <slot name="aside" />}
+      </aside>
+    </div>
+  ) : (
+    <div class="prose">
+      {title && headingInside && <h2>{title}</h2>}
+      <slot />
+    </div>
+  )}
+  <slot name="after" />
+</section>

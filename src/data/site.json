@@ -1,0 +1,41 @@
+{
+  "name": "Melrose Area Historical Society",
+  "shortName": "MAHS",
+  "tagline": "Museum & Heritage Center",
+  "affiliation": "An affiliate of the Stearns County Historical Society.",
+  "address1": "518 2nd St SE",
+  "city": "Melrose, MN 56352",
+  "phone": "320-256-3933",
+  "email": "rpaschke@meltel.net",
+  "facebook": "https://www.facebook.com/melroseareamuseum",
+  "hours": "Wednesdays 9–4",
+  "hoursSeason": "mid-April through September",
+  "hoursDetail": "About April 15 – September 30, or any time by appointment",
+  "hoursNote": "Other times by appointment",
+  "mapsUrl": "https://www.google.com/maps/search/?api=1&query=518+2nd+St+SE+Melrose+MN+56352",
+  "mapEmbedUrl": "https://maps.google.com/maps?q=518+2nd+St+SE+Melrose+MN+56352&output=embed",
+  "admission": [
+    {
+      "label": "Family",
+      "price": "$5.00"
+    },
+    {
+      "label": "Adult",
+      "price": "$2.00"
+    },
+    {
+      "label": "Children 9–15",
+      "price": "$1.00"
+    },
+    {
+      "label": "Under 9",
+      "price": "Free"
+    }
+  ],
+  "admissionSummary": {
+    "primary": "Adults $2 · Family $5",
+    "secondary": "Ages 9–15 $1 · Under 9 free"
+  },
+  "locationNote": "Near St. Mary’s Church and the Lake Wobegon Trail.",
+  "followNote": "Events, new exhibits and schedule changes."
+}

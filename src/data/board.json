@@ -1,0 +1,33 @@
+{
+  "officers": [
+    {
+      "role": "President",
+      "name": "Roger Paschke"
+    },
+    {
+      "role": "Vice President",
+      "name": "Eileen Maus"
+    },
+    {
+      "role": "Treasurer",
+      "name": "Jim Ricklick"
+    },
+    {
+      "role": "Secretary",
+      "name": "Jean Paschke"
+    }
+  ],
+  "directors": [
+    "Don Andersen",
+    "Marilyn Bergmann",
+    "Steve Borgerding",
+    "Scott Dymoke",
+    "Henry Gruber",
+    "Duane Hiltner",
+    "Jone Meyer",
+    "Kathy Middendorf",
+    "Larry Osendorf",
+    "Dustin Rue",
+    "Cheryl Wiechman"
+  ]
+}

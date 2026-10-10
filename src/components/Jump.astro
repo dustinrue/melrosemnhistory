@@ -1,0 +1,7 @@
+---
+interface Props { label: string; items: { href: string; text: string }[] }
+const { label, items } = Astro.props;
+---
+<ul class="jump" aria-label={label}>
+  {items.map((i) => <li><a href={i.href}>{i.text}</a></li>)}
+</ul>

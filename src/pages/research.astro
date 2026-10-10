@@ -1,0 +1,52 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import Photo from '../components/Photo.astro';
+import { pages } from '../lib/data';
+import { section } from '../lib/content';
+import { list } from '../lib/lists';
+
+const meta = pages.research;
+const intro = await section('research-intro');
+const lists = [
+  { id: 'family-histories', title: 'Family histories', file: 'family-histories', jump: 'Family histories',
+    blurb: 'Family histories included in the collection. Visit the research center to view them, or call to ask about a family.' },
+  { id: 'oral-histories', title: 'Oral histories', file: 'oral-histories', jump: 'Oral histories',
+    blurb: 'Oral history tapes in the collection, recorded with residents of the Melrose area.' },
+  { id: 'videos', title: 'Video histories', file: 'video-histories', jump: 'Video histories',
+    blurb: 'Video history tapes in the collection — community events, interviews and local history.' },
+].map((l) => ({ ...l, items: list(l.file) }));
+const total = lists.reduce((n, l) => n + l.items.length, 0);
+---
+<Base title={meta.title} description={meta.description} current="research">
+  <PageHero h1={meta.h1!} lede={meta.lede} />
+  <div class="page"><div class="wrap">
+    <div class="split">
+      <div class="prose"><intro.Content /></div>
+      <aside><figure>
+        <Photo name={intro.data.image!} alt={intro.data.imageAlt!} width={1000} />
+        <figcaption>{intro.data.imageCaption}</figcaption>
+      </figure></aside>
+    </div>
+
+    <h2 style="font-size:clamp(26px,3.4vw,36px);margin-top:56px" id="holdings">What’s in the collection</h2>
+    <div class="filter">
+      <label for="q">Search all family histories, oral histories and videos</label>
+      <input id="q" type="search" placeholder="Try a surname, place or event…" autocomplete="off" data-filter="[data-filterable]" data-count="#count">
+      <p class="count" id="count" aria-live="polite">{total} entries</p>
+    </div>
+    <ul class="jump" aria-label="Jump to a list">
+      {lists.map((l) => <li><a href={`#${l.id}`}>{l.jump} ({l.items.length})</a></li>)}
+    </ul>
+    {lists.map((l) => (
+      <section class="list-sec" id={l.id}>
+        <h2 style="font-size:30px">{l.title} <span class="n" data-total={l.items.length}>({l.items.length})</span></h2>
+        <p class="prose" style="margin-bottom:12px">{l.blurb}</p>
+        <ul class="list-cols" data-filterable>
+          {l.items.map((i) => <li>{i}</li>)}
+        </ul>
+      </section>
+    ))}
+    <p class="empty" id="empty" hidden>No matches. Try a shorter name or a different spelling.</p>
+  </div></div>
+</Base>

@@ -1,0 +1,50 @@
+---
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import StorySection from '../components/StorySection.astro';
+import Jump from '../components/Jump.astro';
+import Timeline from '../components/Timeline.astro';
+import { site, phoneDigits } from '../lib/site';
+import { pages, timeline, board } from '../lib/data';
+import { section } from '../lib/content';
+
+const meta = pages.about;
+const mission = await section('about-mission');
+const building = await section('about-building');
+const history = await section('about-history');
+---
+<Base title={meta.title} description={meta.description} current="about">
+  <PageHero h1={meta.h1!} lede={meta.lede} />
+  <div class="page"><div class="wrap">
+    <Jump label="On this page" items={[
+      { href: '#mission', text: 'Our mission' }, { href: '#building', text: 'Our building' }, { href: '#history', text: 'How we began' },
+      { href: '#timeline', text: 'Timeline' }, { href: '#board', text: 'Board of directors' },
+    ]} />
+
+    <StorySection id="mission" title={mission.data.title} image={mission.data.image} imageAlt={mission.data.imageAlt} headingInside wide first photoWidth={900}>
+      <mission.Content />
+    </StorySection>
+    <StorySection id="building" title={building.data.title} image={building.data.image} imageAlt={building.data.imageAlt} imageCaption={building.data.imageCaption} headingInside wide photoWidth={1600}>
+      <building.Content />
+    </StorySection>
+    <StorySection id="history" title={history.data.title} headingInside>
+      <history.Content />
+    </StorySection>
+
+    <section id="timeline" class="story-sec">
+      <div class="section-head"><h2>Melrose through the years</h2><p>Milestones from the community and from the museum’s own story.</p></div>
+      <Timeline items={timeline} />
+    </section>
+
+    <section id="board" class="story-sec">
+      <h2>Board of directors</h2>
+      <h3 style="font-size:22px">Officers</h3>
+      <div class="officers">
+        {board.officers.map((o) => <div class="officer"><span>{o.role}</span><b>{o.name}</b></div>)}
+      </div>
+      <h3 style="font-size:22px">Directors</h3>
+      <ul class="name-list">{board.directors.map((d) => <li>{d}</li>)}</ul>
+      <div class="callout"><p>Contact the board at <a href={`mailto:${site.email}`}>{site.email}</a> or <a href={`tel:${phoneDigits}`}>{site.phone}</a>.</p></div>
+    </section>
+  </div></div>
+</Base>

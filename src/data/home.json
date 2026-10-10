@@ -1,0 +1,61 @@
+{
+  "hero": {
+    "eyebrow": "Melrose, Minnesota · Est. 1987",
+    "headline": "Where the story of our community is kept.",
+    "lede": "Step inside the old Melrose convent and walk through 150 years of life in central Stearns County — pioneers, pilots, hat-makers and hometown heroes.",
+    "primaryCta": "Plan your visit",
+    "secondaryCta": "Explore the collection"
+  },
+  "visitCard": {
+    "hoursSub": "About April 15 – Sept 30, or by appointment",
+    "findSub": "near St. Mary’s & the Lake Wobegon Trail",
+    "callSub": "to book a tour or ask a question",
+    "followText": "Events and schedule changes are posted on"
+  },
+  "intro": {
+    "eyebrow": "About the Society",
+    "heading": "Collecting and preserving the heritage of the Melrose area.",
+    "lede": "Formed in 1987, the Society operates a museum and research center so that the artifacts and stories of our neighbors — maybe even your grandparents — are there for everyone to enjoy.",
+    "body": "As you visit, investigate the past through the exhibits in each room. See the displays that depict the life and times of our pioneers and citizens, and learn of the settlement of these communities through each era. The collection now numbers more than 2,000 indexed items.",
+    "towns": ["Melrose", "Freeport", "St. Rosa", "New Munich", "Spring Hill", "Greenwald", "Meire Grove"],
+    "photos": [
+      { "image": "parlor.webp", "alt": "Period parlor exhibit with a radio and upholstered chair" },
+      { "image": "sisters.webp", "alt": "Mannequins in a sister's habit and priest's vestments" }
+    ]
+  },
+  "tiles": {
+    "heading": "Come see, come dig in",
+    "subheading": "Browse the exhibits on a tour — or roll up your sleeves in the research center.",
+    "items": [
+      { "title": "Visit the Museum", "text": "Rooms of exhibits in the former St. Mary’s convent, built in 1953 and fully accessible.", "linkLabel": "Hours & what you’ll see", "path": "visit/", "image": "school.webp", "alt": "Schoolroom exhibit with desk, readers and chalkboard" },
+      { "title": "Research Center", "text": "Family histories, oral-history tapes, photographs, obituaries and Melrose Beacon issues from 1908–2008.", "linkLabel": "Start researching", "path": "research/", "image": "research.webp", "alt": "Shelves of family history binders" },
+      { "title": "Museum Store", "text": "Local-history books and woven History Afghans — a gift with a story behind it.", "linkLabel": "See what’s in stock", "path": "visit/#store", "image": "store.webp", "alt": "Books for sale in the museum store" }
+    ]
+  },
+  "stories": {
+    "heading": "Stories from the collection",
+    "subheading": "A few of the people and places you’ll meet in the exhibits.",
+    "items": [
+      { "title": "The Lindberghs of Melrose", "text": "Grandparents of the famed aviator homesteaded here in 1859.", "path": "collections/#lindberghs", "image": "lindbergh.webp" },
+      { "title": "Capt. James Gallagher & the Lucky Lady", "text": "The first non-stop flight around the world, 1949.", "path": "collections/#gallagher", "image": "uniform.webp" },
+      { "title": "Hat shops, a hospital, a theater", "text": "The business and community life of a growing town.", "path": "collections/#milliners", "image": "tray.webp" }
+    ]
+  },
+  "timeline": {
+    "heading": "Melrose through the years",
+    "subheading": "A few milestones from 160+ years of local history — and the story of the museum itself.",
+    "years": ["1859", "1987", "2001"],
+    "cta": "See the full timeline"
+  },
+  "band": {
+    "heading": "Keep the stories going. Become a member.",
+    "text": "Members receive the Society newsletter, free admission, unlimited use of the research center, an invitation to the annual meeting, and a vote.",
+    "cta": "Membership details",
+    "prices": [
+      { "amount": "$10", "label": "Individual / year" },
+      { "amount": "$15", "label": "Family / year" },
+      { "amount": "$35", "label": "Business / year" },
+      { "amount": "$1,000", "label": "Lifetime" }
+    ]
+  }
+}

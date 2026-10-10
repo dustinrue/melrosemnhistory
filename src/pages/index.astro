@@ -1,0 +1,82 @@
+---
+import Base from '../layouts/Base.astro';
+import Photo from '../components/Photo.astro';
+import Timeline from '../components/Timeline.astro';
+import { photo } from '../lib/photos';
+import { site, phoneDigits, url } from '../lib/site';
+import { home, pages, timeline } from '../lib/data';
+
+const meta = pages.home;
+const teaser = home.timeline.years.map((y) => {
+  const hit = timeline.find((t) => t.year === y);
+  if (!hit) throw new Error(`home.json timeline.years has ${y}, which is not in timeline.json`);
+  return hit;
+});
+---
+<Base title={meta.title} description={meta.description} home>
+  <div class="hero"><div class="wrap">
+    <div class="eyebrow">{home.hero.eyebrow}</div>
+    <h1>{home.hero.headline}</h1>
+    <p>{home.hero.lede}</p>
+    <a class="btn primary" href={url('visit/')}>{home.hero.primaryCta}</a><a class="btn ghost" href={url('collections/')}>{home.hero.secondaryCta}</a>
+  </div></div>
+
+  <div class="wrap visit-card"><div class="card">
+    <div class="cell"><h3>Hours</h3><div class="big">{site.hours}</div><div class="sub">{home.visitCard.hoursSub}</div></div>
+    <div class="cell"><h3>Admission</h3><div class="big">{site.admissionSummary.primary}</div><div class="sub">{site.admissionSummary.secondary}</div></div>
+    <div class="cell"><h3>Find us</h3><div class="big">{site.address1}</div><div class="sub">{site.city} · {home.visitCard.findSub}</div></div>
+    <div class="cell"><h3>Call</h3><div class="big">{site.phone}</div><div class="sub">{home.visitCard.callSub}</div></div>
+  </div>
+  <p class="follow">{home.visitCard.followText} <a href={site.facebook} rel="noopener">our Facebook page</a>.</p></div>
+
+  <section>
+    <div class="wrap intro">
+      <div>
+        <div class="eyebrow dark">{home.intro.eyebrow}</div>
+        <h2>{home.intro.heading}</h2>
+        <p class="lede">{home.intro.lede}</p>
+        <p>{home.intro.body}</p>
+        <div class="towns">{home.intro.towns.map((t) => <span>{t}</span>)}</div>
+      </div>
+      <div class="photos">
+        {home.intro.photos.map((p) => <Photo name={p.image} alt={p.alt} width={900} />)}
+      </div>
+    </div>
+  </section>
+
+  <section class="alt"><div class="wrap">
+    <div class="section-head"><h2>{home.tiles.heading}</h2><p>{home.tiles.subheading}</p></div>
+    <div class="grid3">
+      {home.tiles.items.map((t) => (
+        <article class="tile"><Photo name={t.image} alt={t.alt} width={1000} />
+          <div class="body"><h3>{t.title}</h3><p>{t.text}</p><a class="more" href={url(t.path)}>{t.linkLabel}</a></div></article>
+      ))}
+    </div>
+  </div></section>
+
+  <section><div class="wrap">
+    <div class="section-head"><h2>{home.stories.heading}</h2><p>{home.stories.subheading}</p></div>
+    <div class="story-row">
+      {home.stories.items.map((s) => (
+        <a class="story" href={url(s.path)}><Photo name={s.image} alt="" width={700} /><div><b>{s.title}</b><span>{s.text}</span></div></a>
+      ))}
+    </div>
+  </div></section>
+
+  <section class="alt"><div class="wrap">
+    <div class="section-head"><h2>{home.timeline.heading}</h2><p>{home.timeline.subheading}</p></div>
+    <Timeline items={teaser} />
+    <p style="text-align:center;margin:12px 0 0"><a class="btn outline" href={url('about/#timeline')}>{home.timeline.cta}</a></p>
+  </div></section>
+
+  <section class="band"><div class="wrap">
+    <div>
+      <h2>{home.band.heading}</h2>
+      <p>{home.band.text}</p>
+      <a class="btn primary" href={url('get-involved/#membership')}>{home.band.cta}</a>
+    </div>
+    <div class="prices">
+      {home.band.prices.map((p) => <div><b>{p.amount}</b><span>{p.label}</span></div>)}
+    </div>
+  </div></section>
+</Base>

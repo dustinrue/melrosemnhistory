@@ -1,0 +1,27 @@
+---
+import { getCollection, render } from 'astro:content';
+import Base from '../layouts/Base.astro';
+import PageHero from '../components/PageHero.astro';
+import StorySection from '../components/StorySection.astro';
+import Jump from '../components/Jump.astro';
+import { pages } from '../lib/data';
+import { section } from '../lib/content';
+
+const meta = pages.collections;
+const intro = await section('collections-intro');
+const stories = (await getCollection('stories')).sort((a, b) => a.data.order - b.data.order);
+const rendered = await Promise.all(stories.map(async (s) => ({ entry: s, Content: (await render(s)).Content })));
+---
+<Base title={meta.title} description={meta.description} current="collections">
+  <PageHero h1={meta.h1!} lede={meta.lede} />
+  <div class="page"><div class="wrap">
+    <div class="prose"><intro.Content /></div>
+    <Jump label="Jump to a story" items={stories.map((s) => ({ href: `#${s.id}`, text: s.data.title }))} />
+    {rendered.map(({ entry, Content }) => (
+      <StorySection id={entry.id} title={entry.data.title} image={entry.data.image} imageAlt={entry.data.imageAlt}
+        imageCaption={entry.data.imageCaption} image2={entry.data.image2} image2Alt={entry.data.image2Alt}>
+        <Content />
+      </StorySection>
+    ))}
+  </div></div>
+</Base>

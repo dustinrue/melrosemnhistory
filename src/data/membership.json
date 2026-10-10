@@ -1,0 +1,79 @@
+{
+  "benefits": [
+    "Annual subscription to the Historical Society newsletter",
+    "Unlimited free admission to exhibits",
+    "Unlimited use of the Research Center",
+    "Invitation to the annual meeting",
+    "Voting privilege"
+  ],
+  "levels": [
+    {
+      "name": "Individual",
+      "price": "$10",
+      "period": "per year",
+      "kind": "annual",
+      "perks": [],
+      "featured": false
+    },
+    {
+      "name": "Family",
+      "price": "$15",
+      "period": "per year",
+      "kind": "annual",
+      "perks": [
+        "Covers two adults and all children under 18 living at the same address"
+      ],
+      "featured": true
+    },
+    {
+      "name": "Business",
+      "price": "$35",
+      "period": "per year",
+      "kind": "annual",
+      "perks": [
+        "Business name on the Business Membership Certificate"
+      ],
+      "featured": false
+    },
+    {
+      "name": "Associate",
+      "price": "$100",
+      "period": "per year",
+      "kind": "annual",
+      "perks": [
+        "Listing on the Associate Membership Plaque"
+      ],
+      "featured": false
+    },
+    {
+      "name": "Patron",
+      "price": "$250",
+      "period": "per year",
+      "kind": "annual",
+      "perks": [
+        "Listing on the Patron Membership Plaque"
+      ],
+      "featured": false
+    },
+    {
+      "name": "Sustaining",
+      "price": "$500",
+      "period": "donation",
+      "kind": "giving",
+      "perks": [
+        "Listing on the Sustaining Membership Plaque"
+      ],
+      "featured": false
+    },
+    {
+      "name": "Lifetime",
+      "price": "$1,000",
+      "period": "donation",
+      "kind": "giving",
+      "perks": [
+        "Listing on the Lifetime Membership Plaque"
+      ],
+      "featured": false
+    }
+  ]
+}

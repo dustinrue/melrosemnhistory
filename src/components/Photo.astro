@@ -1,0 +1,16 @@
+---
+// A site photograph from src/assets/photos/. Astro resizes it and serves WebP at build time.
+import { Image } from 'astro:assets';
+import { photo } from '../lib/photos';
+
+interface Props {
+  name: string;
+  alt: string;
+  /** Output width in CSS pixels (default 1000). Never upscales past the source. */
+  width?: number;
+  loading?: 'lazy' | 'eager';
+}
+const { name, alt, width = 1000, loading = 'lazy' } = Astro.props;
+const src = photo(name);
+---
+<Image src={src} alt={alt} width={Math.min(width, src.width)} quality={80} format="webp" loading={loading} />
