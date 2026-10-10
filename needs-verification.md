@@ -88,6 +88,15 @@ either omits them or leaves them out of the site text. Verify before adding them
   addresses on purpose.
 - **To do:** the owner plans to flesh it out with real histories of these businesses. Do not add facts without a source.
 
+## 8. Linotype story: local history of this machine
+
+- **Where:** `src/content/stories/linotype.md`
+- **Status:** the story explains how a Linotype works (general knowledge) and says Melrose Beacon-type papers relied on such
+  machines. It does **not** claim this machine was the Beacon's.
+- **Concern:** a small framed photo beside the machine appears to be captioned with a date in June and the words "Linotype moved
+  from ... Melrose Beacon office" plus several names, but the text is too small to read reliably in the photo.
+- **To verify:** read that caption in person; then add when and from where the machine came, and who moved it.
+
 ---
 
 ## Checked and resolved (kept for reference)

@@ -1,6 +1,6 @@
 ---
 title: "The Lindberghs"
-order: 8
+order: 9
 image: lindbergh-exhibit.webp
 imageAlt: "The Lindberghs exhibit: display cases and wall displays of photographs, newspapers and memorabilia beneath a Spirit of St. Louis tapestry, with large cutout portraits of Charles A. Sr. and August Lindbergh and a sign reading The Lindberghs"
 imageCaption: "The Lindberghs exhibit in the museum."

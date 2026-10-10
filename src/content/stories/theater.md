@@ -1,6 +1,6 @@
 ---
 title: "The Melrose Theater"
-order: 7
+order: 8
 image: theater-display.webp
 imageAlt: "Melrose Theater exhibit: a wooden ticket booth with a mannequin ticket seller and an Admission sign reading Adults 50 cents, Children 10 cents, beside a chrome popcorn machine, with movie posters and portraits of film stars on the wall"
 imageCaption: "The Melrose Theater display: ticket window, popcorn machine and movie posters."
