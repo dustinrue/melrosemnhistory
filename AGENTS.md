@@ -242,11 +242,12 @@ jobs:
 
 Content carried over from the 2013-era site that may be stale or inconsistent. Do not silently "fix"; ask.
 
-1. **Two phone numbers existed:** `320-256-3933` (hours/store/volunteer pages) and `320-256-4996` (old header banner/contact page).
-   The site uses `320-256-3933`. Confirm.
-2. **Email:** the site shows `rpaschke@meltel.net`; the membership PDF form says `rpaschke@meltel.com`. Confirm which is right and
-   consider a role address. The PDFs themselves also need updating if details change.
-3. **Hours, admission, membership prices** date from ~2013. Confirm they are current.
+1. **Phone number is unconfirmed.** Two numbers existed: `320-256-3933` (hours/store/volunteer pages and both PDF forms) and
+   `320-256-4996` (old header banner/contact page). The site uses `320-256-3933`. Owner says the correct number is not yet known.
+2. **Email:** confirmed by the owner as `rpaschke@meltel.com` (the old website HTML said `.net`, which was wrong). The site and
+   both PDF forms now agree. Consider a role address (e.g. info@) eventually.
+3. **Hours, admission, membership prices** date from ~2013 and are unconfirmed. Owner has deferred checking them. The PDF forms
+   repeat the prices, so update them together when confirmed.
 4. **Board list** is from the old site (a person was removed and one added at the owner's request); confirm it is current.
 5. **Unverified source wording** kept as written: "F-882 fighter planes" (Gallagher story), "Wapeton Dakota" (likely
    "Wahpeton"), and a sentence in the Convents story that was ungrammatical in the original ("had a convent in a large home
