@@ -67,7 +67,7 @@ src/
     get-involved/membership-form.astro, volunteer-form.astro   printable forms
   styles/global.css     the entire stylesheet                                  <- design zone
   lib/                  helpers, data validation (zod schemas), markdown plugin <- design zone
-  scripts/site.js       mobile menu + research-list filter                     <- design zone
+  scripts/site.js       mobile menu + print button                                 <- design zone
 public/
   favicon.svg, _redirects
 scripts/verify.mjs      post-build checks
@@ -124,7 +124,7 @@ Do not rename an existing story file (it would break links and the redirects).
 
 ### Lists, people and products
 - **Family / oral / video histories:** `src/data/lists/*.txt`, one entry per line, alphabetical by surname. Duplicates fail the build.
-  Counts and the search filter update automatically.
+  The counts shown on the Research page update automatically. The lists are plain static text (there is no search box).
 - **Board:** `src/data/board.json` (`officers` have `role` + `name`; `directors` is a list of names).
 - **Membership levels:** `src/data/membership.json`. `kind` is `annual` or `giving`; one level may have `"featured": true`.
 - **Store books:** `src/data/books.json` (`title`, `subtitle` may be an empty string).
@@ -168,7 +168,7 @@ still fits one page.
   adding/adjusting a component over copying markup.
 - **Accessibility is a requirement, not a nice-to-have:** one `<h1>` per page, logical heading order, text contrast ≥ 4.5:1,
   visible focus, tap targets ≥ 44 px, `alt` on every photo, skip link, `aria-current` on the active nav item, the site
-  works without JavaScript (the menu and list filter are progressive enhancements).
+  works without JavaScript (the mobile menu and the print button are progressive enhancements).
 - After any design change run the visual comparison (section 9) and get the owner's approval.
 - Do not add npm dependencies, client-side frameworks, web fonts or trackers without asking.
 

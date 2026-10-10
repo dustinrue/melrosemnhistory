@@ -213,16 +213,10 @@ figcaption{font-size:15px;color:var(--muted);margin-top:8px}
 .callout,blockquote{background:var(--paper);border:1px solid var(--line);border-left:6px solid var(--gold);border-radius:10px;padding:20px 24px;margin:28px 0}
 .callout p,blockquote p,.prose blockquote p{margin:0}
 .prose h3{font-size:22px;margin-top:1.2em}
-.filter{margin:0 0 24px;max-width:520px}
-.filter label{display:block;font-weight:600;margin-bottom:6px}
-.filter input{width:100%;padding:13px 16px;font:inherit;border:2px solid var(--line);border-radius:10px;background:#fff;min-height:48px}
-.filter .count{color:var(--muted);font-size:15px;margin:6px 0 0}
 .list-cols{columns:3 260px;column-gap:36px;padding:0;margin:0;list-style:none}
 .list-cols li{padding:9px 0;border-bottom:1px solid var(--line);break-inside:avoid}
-.list-cols li[hidden],.list-sec[hidden]{display:none}
 .list-sec{margin-bottom:40px}
 .list-sec .n{font:600 18px "Source Sans 3";color:var(--muted)}
-.empty{color:var(--muted);font-style:italic}
 .back{display:inline-block;margin-top:12px;font-weight:600}
 
 /* footer */

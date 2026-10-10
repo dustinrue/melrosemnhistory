@@ -16,7 +16,6 @@ const lists = [
   { id: 'videos', title: 'Video histories', file: 'video-histories', jump: 'Video histories',
     blurb: 'Video history tapes in the collection — community events, interviews and local history.' },
 ].map((l) => ({ ...l, items: list(l.file) }));
-const total = lists.reduce((n, l) => n + l.items.length, 0);
 ---
 <Base title={meta.title} description={meta.description} current="research">
   <PageHero h1={meta.h1!} lede={meta.lede} />
@@ -30,23 +29,17 @@ const total = lists.reduce((n, l) => n + l.items.length, 0);
     </div>
 
     <h2 style="font-size:clamp(26px,3.4vw,36px);margin-top:56px" id="holdings">What’s in the collection</h2>
-    <div class="filter">
-      <label for="q">Search all family histories, oral histories and videos</label>
-      <input id="q" type="search" placeholder="Try a surname, place or event…" autocomplete="off" data-filter="[data-filterable]" data-count="#count">
-      <p class="count" id="count" aria-live="polite">{total} entries</p>
-    </div>
     <ul class="jump" aria-label="Jump to a list">
       {lists.map((l) => <li><a href={`#${l.id}`}>{l.jump} ({l.items.length})</a></li>)}
     </ul>
     {lists.map((l) => (
       <section class="list-sec" id={l.id}>
-        <h2 style="font-size:30px">{l.title} <span class="n" data-total={l.items.length}>({l.items.length})</span></h2>
+        <h2 style="font-size:30px">{l.title} <span class="n">({l.items.length})</span></h2>
         <p class="prose" style="margin-bottom:12px">{l.blurb}</p>
-        <ul class="list-cols" data-filterable>
+        <ul class="list-cols">
           {l.items.map((i) => <li>{i}</li>)}
         </ul>
       </section>
     ))}
-    <p class="empty" id="empty" hidden>No matches. Try a shorter name or a different spelling.</p>
   </div></div>
 </Base>
