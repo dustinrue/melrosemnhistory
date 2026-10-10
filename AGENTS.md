@@ -87,7 +87,7 @@ Hours, season, admission prices, address, phone, email, Facebook URL, map links.
   hours out: `src/content/sections/visit-visiting.md` (first paragraph) and `src/data/home.json` → `visitCard.hoursSub`.
 - Changing **admission**: edit the `admission` array AND `admissionSummary.primary/secondary` (the short Home-page line),
   and keep them consistent.
-- Changing the **phone**: edit `phone` only (format `320-256-4996`; the build rejects other formats). It is used everywhere
+- Changing the **phone**: edit `phone` only (format `320-256-3933`; the build rejects other formats). It is used everywhere
   including `tel:` links.
 - `locationNote` and `followNote` are the small captions on the Visit page fact cards.
 
@@ -181,7 +181,7 @@ still fits one page.
 | Project | `melrosemnhistory` (Direct Upload, production branch `main`), account "melrosemnhistory.com" |
 | URL | <https://melrosemnhistory.pages.dev> (preview deployments: `https://preview.melrosemnhistory.pages.dev`) |
 | What is deployed | a **noindex** build of the site, for review. The custom domain is **not attached yet**; `www.melrosemnhistory.com` still points at the old web2 server. |
-| Deploy | `scripts/deploy.sh preview` or `scripts/deploy.sh production` (builds, runs `npm run verify`, uploads `dist/` with Wrangler) |
+| Deploy | `scripts/deploy.sh staging` (noindex, the pages.dev URL), `preview` (noindex alias) or `production` (indexable). Builds, runs `npm run verify`, uploads `dist/` with Wrangler. |
 | Token | an account-scoped API token with **Cloudflare Pages: Edit**, supplied through the `CF_MUSEUM` (or `CLOUDFLARE_API_TOKEN`) environment variable. Never commit it, paste it into files, or print it. |
 
 Direct Upload fits the planned CI: a GitHub Action can run `scripts/deploy.sh` (store the token as a repository secret).
@@ -273,10 +273,11 @@ jobs:
 
 Content carried over from the 2013-era site that may be stale or inconsistent. Do not silently "fix"; ask.
 
-1. **Phone number (resolved).** The site publishes **320-256-4996** everywhere (single source: `phone` in `src/data/site.json`),
-   including the printable forms. *Reference only:* the old site also used **320-256-3933** on the hours, store and volunteer
-   pages and in the old PDF forms; the owner says that number **rings to a specific person**, so it must not be published as
-   the general number.
+1. **Phone number (decided by the owner, October 2026).** The site publishes **320-256-3933** everywhere (single source: `phone`
+   in `src/data/site.json`), including the printable forms. This is the number the old site used on the hours, store and volunteer
+   pages and in the old PDF forms. *History:* the old header banner and contact page showed **320-256-4996**; the site briefly
+   used that number, and the owner then reverted to 3933. The owner has said 4996 may ring to a specific person, so do not
+   switch back or publish both without asking. To change, edit `phone` once.
 2. **Email (resolved):** confirmed by the owner as `rpaschke@meltel.com` (the old website HTML said `.net`, which was wrong).
    Consider a role address (e.g. info@) eventually.
    **Address (resolved):** `518 2nd St SE`. Melrose changed to the SE address format; the old volunteer PDF's "518 E Second Street S"
