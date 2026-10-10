@@ -13,6 +13,12 @@ const stories = defineCollection({
     imageCaption: z.string().optional(),
     image2: z.string().optional(),
     image2Alt: z.string().optional(),
+    // Extra photos shown as a row under the story text (any number; each needs alt text).
+    gallery: z.array(z.object({
+      image: z.string().min(1),
+      alt: z.string().min(1),
+      caption: z.string().optional(),
+    })).optional(),
   }).refine((s) => !s.image || s.imageAlt, { message: 'imageAlt is required when image is set (accessibility)', path: ['imageAlt'] })
     .refine((s) => !s.image2 || s.image2Alt, { message: 'image2Alt is required when image2 is set', path: ['image2Alt'] }),
 });

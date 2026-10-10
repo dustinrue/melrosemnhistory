@@ -19,7 +19,8 @@ const rendered = await Promise.all(stories.map(async (s) => ({ entry: s, Content
     <Jump label="Jump to a story" items={stories.map((s) => ({ href: `#${s.id}`, text: s.data.title }))} />
     {rendered.map(({ entry, Content }) => (
       <StorySection id={entry.id} title={entry.data.title} image={entry.data.image} imageAlt={entry.data.imageAlt}
-        imageCaption={entry.data.imageCaption} image2={entry.data.image2} image2Alt={entry.data.image2Alt}>
+        imageCaption={entry.data.imageCaption} image2={entry.data.image2} image2Alt={entry.data.image2Alt}
+        gallery={entry.data.gallery}>
         <Content />
       </StorySection>
     ))}

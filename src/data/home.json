@@ -53,8 +53,8 @@
         "text": "Family histories, oral-history tapes, photographs, obituaries and Melrose Beacon issues from 1908–2008.",
         "linkLabel": "Start researching",
         "path": "research/",
-        "image": "research.webp",
-        "alt": "Shelves of family history binders"
+        "image": "research-workstations.webp",
+        "alt": "Computer workstations, a printer and a document scanner in the research center"
       },
       {
         "title": "Museum Store",
@@ -79,7 +79,7 @@
       {
         "title": "Capt. James Gallagher & the Lucky Lady",
         "text": "The first non-stop flight around the world, 1949.",
-        "path": "collections/#gallagher",
+        "path": "collections/#capt-james-gallagher",
         "image": "uniform.webp"
       },
       {

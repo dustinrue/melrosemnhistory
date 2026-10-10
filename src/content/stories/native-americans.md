@@ -1,6 +1,9 @@
 ---
 title: "Native Americans"
 order: 1
+image: native-american-artifacts.webp
+imageAlt: "Stone points and tools and a few yellow shells arranged on a white board in a display case, with a label reading Area One Site, a cabin located southeast of Little Birch Lake"
+imageCaption: "Stone points, tools and shells in the museum’s Native American display. The label reads “Area One Site: a cabin located southeast of Little Birch Lake.”"
 ---
 
 The original inhabitants of this area were members of several prehistoric cultures. A subculture called the Malmo focus lived here in the Middle Woodland Period, roughly between 300 and 1000 A.D.
