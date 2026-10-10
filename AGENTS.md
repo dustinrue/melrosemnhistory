@@ -71,6 +71,7 @@ src/
 public/
   favicon.svg, _redirects
 scripts/verify.mjs      post-build checks
+needs-verification.md   wording that must be checked against a source before changing (see section 12)
 tools/visual-diff/      optional screenshot comparison (section 9)
 ```
 
@@ -264,21 +265,9 @@ Content carried over from the 2013-era site that may be stale or inconsistent. D
 3. **Hours, admission, membership prices (resolved):** the owner treats the current values as confirmed. Prices feed the website
    and the printable form from `membership.json`, so one edit updates both.
 4. **Board list (resolved):** the owner confirmed it is current (a person was removed and one added during the migration).
-5. **Source wording in the Gallagher / Lucky Lady and Native Americans / Convents stories (OPEN).** Kept as the old site had it,
-   except where noted. Verify against the Melrose Beacon archive (1908-2008, digitized at the museum) before changing:
-   - **"F-882 fighter planes"** (Gallagher story, parade): not a real aircraft designation. Possibly the F-82 Twin Mustang, a
-     fighter in service in 1949, but not verified. Check the May 1949 Beacon.
-   - **"Total air time was 78 hours 54 minutes; average 249 miles per hour"**: the figures disagree. Official Air Force sources
-     describe the flight as 94 hours 1 minute over 23,452 miles, which averages ~249 mph, so "78 hours 54 minutes" looks wrong.
-     Also, the aircraft was named *Lucky Lady II*.
-   - **"22nd anniversary of Lindbergh's landing in Paris"**: the original read "22nd year of Lindbergh's landing". Lindbergh took
-     off May 20, 1927 and landed May 21, so "anniversary of Lindbergh's flight" would be exact. The wording was lightly reworded
-     during migration.
-   - **"Wapeton Dakota"** (Native Americans story): no source uses this spelling; the standard form is **Wahpeton**. Safe to change.
-   - **Convents story, St. Patrick's sentence:** the original was ungrammatical ("also had a convent large home built by pioneer
-     resident Peter Pallansch"). Migrated as "had a convent in a large home built by…", which is an interpretation.
-   - The Native Americans dates ("Malmo focus … 300 to 1000 A.D.") match the central-Minnesota Woodland chronology; no change
-     suggested.
+5. **Source wording needing verification (OPEN):** see **[needs-verification.md](needs-verification.md)**. It lists each doubtful
+   passage (file, exact text, why it is doubtful, how to verify). **Do not change those passages without a source**, and delete the
+   entry from that file when you resolve it. Resolved so far: "Wapeton" was corrected to "Wahpeton" (owner approved).
 6. **Typos fixed during migration** (so nobody "re-fixes" them): Walter Haut, August Kuhlmann, *Spirit* of St. Louis,
    Chronicle, Fort Worth, Woodland Period, Hetzel, Lake Wobegon.
 7. **Fonts (resolved):** the owner is fine with loading Fraunces and Source Sans 3 from Google Fonts.
