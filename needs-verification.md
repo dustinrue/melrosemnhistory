@@ -80,6 +80,14 @@ either omits them or leaves them out of the site text. Verify before adding them
   **Gulf War sign:** "total U.S. battle deaths, 148". None of these figures are on the site.
 - **Dates in the headings** (e.g. WWII 1939-1945, Korea 1950-1953, Vietnam 1965-1975) were added from general knowledge, not the signs.
 
+## 7. Main Street Businesses story is a placeholder
+
+- **Where:** `src/content/stories/local-businesses.md`
+- **Status:** a short, general introduction written from what is visible in one photo (Swany White Bakery sign, Bohlig
+  Cleaners banner, Herges Speedy Delivery Grocery jacket, Dayton scale, cash registers). It names no dates, owners or
+  addresses on purpose.
+- **To do:** the owner plans to flesh it out with real histories of these businesses. Do not add facts without a source.
+
 ---
 
 ## Checked and resolved (kept for reference)
