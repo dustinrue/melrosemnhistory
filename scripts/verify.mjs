@@ -50,6 +50,18 @@ for (const f of htmlFiles) {
     if (frag && target.endsWith('.html') && !idsByFile.get(target)?.has(frag)) problems.push(`${rel}: missing anchor ${u}`);
   }
 }
+// Every url(...) inside the built CSS must point at a file that exists (HTML link checks do not cover CSS backgrounds).
+for (const f of files.filter((x) => x.endsWith('.css'))) {
+  const rel = f.slice(dist.length + 1);
+  const css = readFileSync(f, 'utf8');
+  for (const m of css.matchAll(/url\(\s*["']?([^"')]+)["']?\s*\)/g)) {
+    const u = m[1];
+    if (/^(https?:|data:|#)/.test(u)) continue;
+    const abs = u.startsWith('/') ? u : posix.join('/' + rel.split(sep).join('/').replace(/[^/]*$/, ''), u);
+    if (!toFile(abs.split('#')[0].split('?')[0])) problems.push(`${rel}: CSS references missing file ${u}`);
+  }
+}
+
 // An indexable build (robots.txt allows crawling) must not carry noindex, and every page needs a canonical URL.
 const robots = existsSync(join(dist, 'robots.txt')) ? readFileSync(join(dist, 'robots.txt'), 'utf8') : '';
 const indexable = /^Allow:\s*\/\s*$/m.test(robots);

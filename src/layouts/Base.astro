@@ -3,8 +3,6 @@
 import '../styles/global.css';
 import { site, phoneDigits, url } from '../lib/site';
 import { nav, joinPath, type NavKey } from '../lib/nav';
-import { getImage } from 'astro:assets';
-import { photo } from '../lib/photos';
 
 interface Props {
   title: string;
@@ -24,11 +22,9 @@ const year = new Date().getFullYear();
 // Absolute URLs for canonical links and social previews need SITE_URL at build time (set by scripts/deploy.sh).
 const origin = Astro.site;
 const canonical = origin && !noCanonical ? new URL(Astro.url.pathname, origin).href : undefined;
-let ogImage: string | undefined;
-if (origin) {
-  const og = await getImage({ src: photo('hero-museum.webp'), width: 1200, height: 630, fit: 'cover', format: 'jpeg', quality: 80 });
-  ogImage = new URL(og.src, origin).href;
-}
+// Social-preview image: a fixed 1200x630 file in /public (not processed by the image pipeline, so it can never
+// interfere with the hero background that global.css loads from src/assets).
+const ogImage = origin ? new URL(url('og-image.jpg'), origin).href : undefined;
 
 // Structured data for search engines (home page only): who we are, where, how to reach us.
 let jsonLd: string | undefined;
